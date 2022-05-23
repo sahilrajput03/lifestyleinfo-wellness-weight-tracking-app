@@ -1,7 +1,9 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js'
 import {Line} from 'react-chartjs-2'
 import * as Realm from 'realm-web'
+import UsersList from './components/UsersList'
+import AddUser from './components/AddUser'
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
 
@@ -28,12 +30,12 @@ for (let i = 1; i < 32; i++) {
 export const data = {
 	labels,
 	datasets: [
-		{
-			label: 'Sahil',
-			data: [51, 52.3, 51.3, 52.1],
-			borderColor: 'rgb(255, 99, 132)',
-			backgroundColor: 'rgba(255, 99, 132, 0.5)',
-		},
+		// {
+		// 	label: 'Sahil',
+		// 	data: [50.8, 51, 52.3, 51.3, 52.1],
+		// 	borderColor: 'rgb(255, 99, 132)',
+		// 	backgroundColor: 'rgba(255, 99, 132, 0.5)',
+		// },
 		// {
 		// 	label: 'Hari Om',
 		// 	data: labels.map(() => faker.datatype.number({min: -1000, max: 1000})),
@@ -44,16 +46,19 @@ export const data = {
 }
 
 function App() {
+	const [user, setUser] = useState(null)
+	const [users, setUsers] = useState(null)
 	useEffect(() => {
 		async function main() {
 			const app = new Realm.App({id: process.env.REACT_APP_REALM_APP_ID})
 			const credentials = Realm.Credentials.anonymous()
 			try {
 				const user = await app.logIn(credentials)
-				console.log('got user', user)
+				// console.log('got user', user)
 
-				const allCats = await user.functions.getAllCats()
-				console.log('allCats', allCats)
+				const allUsers = await user.functions.getAllUsers()
+				console.log('allUsers', allUsers)
+				setUsers(allUsers)
 			} catch (err) {
 				console.error('Failed to log in', err)
 			}
@@ -62,7 +67,13 @@ function App() {
 		main()
 	}, [])
 
-	return <Line options={options} data={data} />
+	return (
+		<div>
+			<Line className='line-graph' options={options} data={data} />
+			{/* <UsersList users={users} /> */}
+			<AddUser />
+		</div>
+	)
 }
 
 export default App
