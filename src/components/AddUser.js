@@ -1,11 +1,12 @@
 import {useState} from 'react'
 
 let log = console.log
-const debug = true
 
 const AddUser = ({USER = null, SHOW = false, CB = () => {}}) => {
 	const [show, setShow] = useState(SHOW)
 	const [user, setUser] = useState(USER)
+	const [debug, setDebug] = useState(false)
+
 	window.user = user
 
 	const onChange = (e) => {
@@ -90,6 +91,7 @@ const AddUser = ({USER = null, SHOW = false, CB = () => {}}) => {
 			}
 			setUser(null)
 			setShow(false)
+			CB()
 		} catch (error) {
 			alert('Failed..')
 			log(error)
@@ -105,7 +107,7 @@ const AddUser = ({USER = null, SHOW = false, CB = () => {}}) => {
 	const showBmi = user?.weight && user?.height
 
 	return show ? (
-		<div className='box-border max-w-lg m-auto bg-white shadow-lg rounded px-8 pt-6 mt-5 pb-8 mb-4'>
+		<div className='flex-col max-w-lg m-auto bg-white shadow-lg rounded px-8 pt-6 mt-5 pb-8 mb-4'>
 			{false && (
 				<>
 					<span className='font-bold underline'>Sahil Stats:</span>
@@ -125,9 +127,9 @@ const AddUser = ({USER = null, SHOW = false, CB = () => {}}) => {
 			<div className='field-container'>
 				<span className='field'>Gender</span>
 				<form className='field-input border-none' onChange={onChange}>
-					<input name='gender' type='radio' value='male' />
+					<input name='gender' type='radio' value='male' checked={user.gender === 'male'} />
 					<label htmlFor='male'>Male</label>
-					<input name='gender' type='radio' value='female' className='ml-2' />
+					<input name='gender' type='radio' value='female' className='ml-2' checked={user.gender === 'female'} />
 					<label htmlFor='female'>Female</label>
 				</form>
 			</div>
@@ -158,6 +160,7 @@ const AddUser = ({USER = null, SHOW = false, CB = () => {}}) => {
 					Cancel
 				</button>
 			</div>
+
 			{debug ? <pre>{JSON.stringify(user, null, 2)}</pre> : null}
 			<br />
 			<div className='font-bold text-gray-700 mt-5'>Tips </div>
@@ -169,6 +172,9 @@ const AddUser = ({USER = null, SHOW = false, CB = () => {}}) => {
 				Between <b>18.5 and 24.9</b> means you're in the healthy weight range.
 			</li>
 			<li className='italic text-gray-500'>Between 25 and 29.9 means you're in the overweight range.</li>
+			<div className='flex justify-end'>
+				<button onClick={() => setDebug(!debug)}>Debug?</button>
+			</div>
 		</div>
 	) : (
 		<button className='btn-primary' onClick={() => setShow(!show)}>
