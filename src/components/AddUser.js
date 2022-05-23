@@ -3,9 +3,9 @@ import {useState} from 'react'
 let log = console.log
 const debug = true
 
-const AddUser = () => {
-	const [show, setShow] = useState(false)
-	const [user, setUser] = useState(null)
+const AddUser = ({USER = null, SHOW = false, CB = () => {}}) => {
+	const [show, setShow] = useState(SHOW)
+	const [user, setUser] = useState(USER)
 	window.user = user
 
 	const onChange = (e) => {
@@ -72,10 +72,34 @@ const AddUser = () => {
 		// const bmi = (user?.weight / ((user?.height / 100) ** 2)).toFixed(2)
 	}
 
-	const submit = () => {}
+	const submit = async () => {
+		let userMongo = window.userMongo
+		log('submit button pressed..')
+		try {
+			const allUsers = await userMongo.functions.getAllUsers(user)
+			// allUsers.map(u => u._id.toString()) // get string _id's
+			const allNames = allUsers.map((u) => u.name.toLowerCase())
+			const duplicateUser = allNames.includes(user?.name.toLowerCase())
+
+			if (duplicateUser) {
+				await userMongo.functions.updateUser({id: user._id.toString(), update: user})
+				alert('User updated!')
+			} else {
+				await userMongo.functions.createUser(user)
+				alert('User Created!')
+			}
+			setUser(null)
+			setShow(false)
+		} catch (error) {
+			alert('Failed..')
+			log(error)
+		}
+	}
 
 	const cancel = () => {
 		setShow(!show)
+		setUser(null)
+		CB()
 	}
 
 	const showBmi = user?.weight && user?.height
@@ -96,7 +120,7 @@ const AddUser = () => {
 			<h2 className='text-2xl font-bold text-center'>User Profile</h2>
 
 			<div className='field-container'>
-				<span className='field'>Name</span> <input className='field-input' name='name' placeholder='Enter name here..' onChange={onChange} value={user?.name} />
+				<span className='field'>Name</span> <input className='field-input' name='name' placeholder='Enter name here..' onChange={onChange} value={user?.name || ''} />
 			</div>
 			<div className='field-container'>
 				<span className='field'>Gender</span>
@@ -108,23 +132,23 @@ const AddUser = () => {
 				</form>
 			</div>
 			<div className='field-container'>
-				<span className='field'>Birth</span> <input name='birth' className='field-input' placeholder='22/03/1983' onChange={onChange} value={user?.birth} />
+				<span className='field'>Birth</span> <input name='birth' className='field-input' placeholder='22/03/1983' onChange={onChange} value={user?.birth || ''} />
 			</div>
 			<div className='field-container'>
-				<span className='field'>Age</span> {user?.age ? user.age : <span className='text-gray-400 mr-8'>Please enter your DOB ..</span>}
+				<span className='field'>Age</span> {user?.age ? <span className='field-input border-none'>{user.age}</span> : <span className='text-gray-400 mr-8'>Please enter your DOB ..</span>}
 			</div>
 			<div className='field-container'>
 				<span className='field'>Weight (kg)</span>
-				<input name='weight' className='field-input' type='number' placeholder='Enter weight here..' onChange={onChange} value={user?.weight} />
+				<input name='weight' className='field-input' type='number' placeholder='Enter weight here..' onChange={onChange} value={user?.weight || ''} />
 			</div>
 			<div className='field-container'>
-				<span className='field'>Height (cms)</span> <input name='height' className='field-input' type='number' placeholder='Enter height here..' onChange={onChange} value={user?.height} />
+				<span className='field'>Height (cms)</span> <input name='height' className='field-input' type='number' placeholder='Enter height here..' onChange={onChange} value={user?.height || ''} />
 			</div>
 			<div className='field-container'>
-				<span className='field'>BMI</span> {showBmi ? user.bmi : <span className='text-gray-400'>Please enter height and weight first..</span>}
+				<span className='field'>BMI</span> {showBmi ? <span className='field-input border-none'>{user.bmi}</span> : <span className='text-gray-400'>Please enter height and weight first..</span>}
 			</div>
 			<div className='field-container'>
-				<span className='field'>Ideal Weight</span> {user?.idealWeight ? user?.idealWeight : <span className='text-gray-400'>Please enter height and gender first..</span>}
+				<span className='field'>Ideal Weight</span> {user?.idealWeight ? <span className='field-input border-none'>{user.idealWeight}</span> : <span className='text-gray-400'>Please enter height and gender first..</span>}
 			</div>
 			<div className='flex justify-end'>
 				<button className='btn-primary' onClick={submit}>

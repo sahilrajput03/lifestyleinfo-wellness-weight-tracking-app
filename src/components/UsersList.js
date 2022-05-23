@@ -1,14 +1,14 @@
 const UsersList = ({users}) => {
 	return (
 		<>
-			<h2>Users</h2>
+			<h2 className='font-bold text-2xl'>Users</h2>
 			{users &&
 				users.map((user) => {
 					return (
-						<div>
-							<li>{user.name}</li>
-							<li>{user.age}</li>
-							<li>{user.height}</li>
+						<div className=''>
+							<div className='font-bold'>{user.name}</div>
+							<div>Age: {user.age}</div>
+							<div> Height:{user.height}</div>
 						</div>
 					)
 				})}

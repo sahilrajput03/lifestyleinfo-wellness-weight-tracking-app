@@ -4,6 +4,7 @@ import {Line} from 'react-chartjs-2'
 import * as Realm from 'realm-web'
 import UsersList from './components/UsersList'
 import AddUser from './components/AddUser'
+import EditUser from './components/EditUser'
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
 
@@ -53,10 +54,11 @@ function App() {
 			const app = new Realm.App({id: process.env.REACT_APP_REALM_APP_ID})
 			const credentials = Realm.Credentials.anonymous()
 			try {
-				const user = await app.logIn(credentials)
+				const userMongo = await app.logIn(credentials)
+				window.userMongo = userMongo // true global state solution.. ~ Sahil,
 				// console.log('got user', user)
 
-				const allUsers = await user.functions.getAllUsers()
+				const allUsers = await userMongo.functions.getAllUsers()
 				console.log('allUsers', allUsers)
 				setUsers(allUsers)
 			} catch (err) {
@@ -67,12 +69,15 @@ function App() {
 		main()
 	}, [])
 
-	return (
+	return users ? (
 		<div className='max-w-7xl m-auto border-2 box-border'>
 			<AddUser />
+			<EditUser users={users} />
 			<Line className='line-graph' options={options} data={data} />
-			{/* <UsersList users={users} /> */}
+			<UsersList users={users} />
 		</div>
+	) : (
+		'Loading..'
 	)
 }
 
