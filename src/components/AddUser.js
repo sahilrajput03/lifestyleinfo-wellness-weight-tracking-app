@@ -1,6 +1,7 @@
 import {useState} from 'react'
 
 let log = console.log
+const debug = false
 
 const AddUser = () => {
 	const [show, setShow] = useState(false)
@@ -70,18 +71,22 @@ const AddUser = () => {
 
 	return show ? (
 		<div>
-			<span className='font-bold underline'>Sahil Stats:</span>
-			<br />
-			weight: 52.3kg
-			<br />
-			height: 180.34cms
-			<br />
-			<br />
+			{false && (
+				<>
+					<span className='font-bold underline'>Sahil Stats:</span>
+					<br />
+					weight: 52.3kg
+					<br />
+					height: 180.34cms
+					<br />
+					<br />
+				</>
+			)}
 			<div>
-				Name: <input name='name' onChange={onChange} value={user?.name} />
+				<span className='field'>Name</span> <input className='field-input' name='name' placeholder='Enter name here..' onChange={onChange} value={user?.name} />
 			</div>
 			<div>
-				Gender:
+				<span className='field'>Gender</span>
 				<form className='inline' onChange={onChange}>
 					<input name='gender' type='radio' value='male' />
 					<label for='male'>Male</label>
@@ -90,22 +95,29 @@ const AddUser = () => {
 				</form>
 			</div>
 			<div>
-				Age: <input name='age' onChange={onChange} value={user?.age} />
+				<span className='field'>Age</span> <input name='age' className='field-input' placeholder='Enter age here..' onChange={onChange} value={user?.age} />
 			</div>
 			<div>
-				Weight (kg):
-				<input name='weight' onChange={onChange} value={user?.weight} />
+				<span className='field'>Weight (kg)</span>
+				<input name='weight' className='field-input' placeholder='Enter weight here..' onChange={onChange} value={user?.weight} />
 			</div>
 			<div>
-				Height (cms): <input name='height' onChange={onChange} value={user?.height} />
+				<span className='field'>Height (cms)</span> <input name='height' className='field-input' placeholder='Enter height here..' onChange={onChange} value={user?.height} />
 			</div>
-			<div>BMI: {showBmi ? user.bmi : <span className='italic'>Enter height and weight first..</span>}</div>
-			<div>Ideal Weight: {user?.idealWeight ? user?.idealWeight : <span className='italic'>Enter height and gender first..</span>}</div>
+			<div>
+				<span className='field'>BMI</span> {showBmi ? user.bmi : <span className='text-gray-400'>Please enter height and weight first..</span>}
+			</div>
+			<div>
+				<span className='field'>Ideal Weight</span> {user?.idealWeight ? user?.idealWeight : <span className='text-gray-400'>Please enter height and gender first..</span>}
+			</div>
+			<button className='btn-primary' onClick={submit}>
+				Submit
+			</button>
+			<button className='btn-secondary' onClick={cancel}>
+				Cancel
+			</button>
+			{debug ? <pre>{JSON.stringify(user, null, 2)}</pre> : null}
 			<br />
-			<br />
-			<button onClick={submit}>Submit User</button>
-			<button onClick={cancel}>Cancel</button>
-			<pre>{JSON.stringify(user, null, 2)}</pre>
 			<i>Conversions: 1ft = 12inch = 30.48cms </i>
 			<br />
 			<i>Formula: weight(kg)/height(m) </i>, Unit: kg/m²
@@ -113,7 +125,9 @@ const AddUser = () => {
 			<i>BMI ranges below 18.5 means you're in the underweight range. Between 18.5 and 24.9 means you're in the healthy weight range. Between 25 and 29.9 means you're in the overweight range.</i>
 		</div>
 	) : (
-		<button onClick={() => setShow(!show)}>Add user</button>
+		<button className='btn-primary' onClick={() => setShow(!show)}>
+			Add user
+		</button>
 	)
 }
 // IDEAL BODY WEIGHT: male(50 + 2.3*(h-60)inch) and female(45.5 + 2.3*(h-60)inch)

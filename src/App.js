@@ -69,9 +69,9 @@ function App() {
 
 	return (
 		<div>
+			<AddUser />
 			<Line className='line-graph' options={options} data={data} />
 			{/* <UsersList users={users} /> */}
-			<AddUser />
 		</div>
 	)
 }
