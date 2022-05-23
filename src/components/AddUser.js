@@ -81,7 +81,7 @@ const AddUser = () => {
 	const showBmi = user?.weight && user?.height
 
 	return show ? (
-		<div className='max-w-lg m-auto bg-white shadow-md rounded px-8 pt-6 mt-5 pb-8 mb-4'>
+		<div className='box-border max-w-lg m-auto bg-white shadow-lg rounded px-8 pt-6 mt-5 pb-8 mb-4'>
 			{false && (
 				<>
 					<span className='font-bold underline'>Sahil Stats:</span>
@@ -126,12 +126,14 @@ const AddUser = () => {
 			<div className='field-container'>
 				<span className='field'>Ideal Weight</span> {user?.idealWeight ? user?.idealWeight : <span className='text-gray-400'>Please enter height and gender first..</span>}
 			</div>
-			<button className='btn-primary' onClick={submit}>
-				Submit
-			</button>
-			<button className='btn-secondary' onClick={cancel}>
-				Cancel
-			</button>
+			<div className='flex justify-end'>
+				<button className='btn-primary' onClick={submit}>
+					Submit
+				</button>
+				<button className='btn-secondary ml-3' onClick={cancel}>
+					Cancel
+				</button>
+			</div>
 			{debug ? <pre>{JSON.stringify(user, null, 2)}</pre> : null}
 			<br />
 			<div className='font-bold text-gray-700 mt-5'>Tips </div>

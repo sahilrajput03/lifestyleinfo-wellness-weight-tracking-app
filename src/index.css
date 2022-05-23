@@ -4,7 +4,7 @@
 
 /* sahil code below */
 .line-graph {
-	max-width: clamp(200px, 100vw, 1500px);
+	/* max-width: clamp(200px, 100vw, 1500px); */
 	/* margin: auto; */
 	/* width: 500px; */
 }
@@ -27,5 +27,8 @@
 	.field-input {
 		@apply border border-gray-200 focus:outline-gray-400 p-1 rounded-md text-gray-600 text-center w-[+250px];
 		/* to remove focus outline use: focus:outline-none */
+	}
+	* {
+		@apply box-border;
 	}
 }
