@@ -4,6 +4,14 @@ Reference Article: https://blog.logrocket.com/using-chart-js-react
 
 React-chartjs-2: https://react-chartjs-2.js.org/examples/line-chart/
 
+Mongodb web-sdk: https://www.mongodb.com/docs/realm/web/#std-label-web-intro
+
+Mongodb driver docs: https://mongodb.github.io/node-mongodb-native/4.5/
+
+- realm-web docs: https://www.mongodb.com/docs/realm/web/quickstart/
+
+- inspiration: https://youtu.be/Evp3xTzWCu4?list=PL4RCxklHWZ9v2lcat4oEVGQhZg6r4IQGV
+
 # mongodb-realm functions
 
 db: `newlifestyle`
@@ -15,8 +23,6 @@ realmapp: `app-newlifestyle`
 Functions:
 
 ```js
-// mongodb driver docs: https://mongodb.github.io/node-mongodb-native/4.5/
-
 // createUser
 // TESTING: exports({name: 'sahil', lastName: 'rajput'})
 exports = function (arg) {

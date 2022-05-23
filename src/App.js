@@ -2,8 +2,6 @@ import React, {useEffect} from 'react'
 import {Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js'
 import {Line} from 'react-chartjs-2'
 import * as Realm from 'realm-web'
-// realm-web docs: https://www.mongodb.com/docs/realm/web/quickstart/
-// inspiration: https://youtu.be/Evp3xTzWCu4?list=PL4RCxklHWZ9v2lcat4oEVGQhZg6r4IQGV
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
 
