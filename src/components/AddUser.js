@@ -1,7 +1,7 @@
 import {useState} from 'react'
 
 let log = console.log
-const debug = false
+const debug = true
 
 const AddUser = () => {
 	const [show, setShow] = useState(false)
@@ -10,7 +10,7 @@ const AddUser = () => {
 
 	const onChange = (e) => {
 		const {name, value} = e.target
-		let bmi, idealWeight, heightSquared
+		let bmi, idealWeight, heightSquared, age
 
 		switch (name) {
 			case 'weight':
@@ -45,6 +45,17 @@ const AddUser = () => {
 					return {...user, [name]: value, idealWeight}
 				})
 
+				break
+
+			case 'birth':
+				if (value.length === 10) {
+					const [yyyy, mm, dd] = value.split('/')
+					const ddmmyyyy = [dd, mm, yyyy].join('/')
+					age = getAge(ddmmyyyy)
+				}
+				setUser((user) => {
+					return {...user, [name]: value, age}
+				})
 				break
 
 			default:
@@ -97,7 +108,7 @@ const AddUser = () => {
 				</form>
 			</div>
 			<div className='field-container'>
-				<span className='field'>Birth</span> <input name='birth' className='field-input' placeholder='22/03/1983' onChange={onChange} value={user?.age} />
+				<span className='field'>Birth</span> <input name='birth' className='field-input' placeholder='22/03/1983' onChange={onChange} value={user?.birth} />
 			</div>
 			<div className='field-container'>
 				<span className='field'>Age</span> {user?.age ? user.age : <span className='text-gray-400 mr-8'>Please enter your DOB ..</span>}
@@ -155,4 +166,16 @@ const idealWeightFn = (height, gender) => {
 		idealWeight = 45.5 + 2.3 * (heightInInches - 60)
 	}
 	return idealWeight.toFixed(2)
+}
+
+// src: https://stackoverflow.com/a/7091965/10012446
+function getAge(dateString) {
+	var today = new Date()
+	var birthDate = new Date(dateString)
+	var age = today.getFullYear() - birthDate.getFullYear()
+	var m = today.getMonth() - birthDate.getMonth()
+	if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+		age--
+	}
+	return age
 }
