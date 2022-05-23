@@ -68,7 +68,7 @@ function App() {
 	}, [])
 
 	return (
-		<div>
+		<div className='max-w-7xl m-auto border-2'>
 			<AddUser />
 			<Line className='line-graph' options={options} data={data} />
 			{/* <UsersList users={users} /> */}
