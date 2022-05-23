@@ -5,14 +5,19 @@ let log = console.log
 const AddUser = () => {
 	const [show, setShow] = useState(false)
 	const [user, setUser] = useState(null)
+	window.user = user
 
 	const onChange = (e) => {
 		const {name, value} = e.target
-		let bmi, idealWeight
+		let bmi, idealWeight, heightSquared
 
 		switch (name) {
 			case 'weight':
-				bmi = (value / ((user?.height / 100) ^ 2)).toFixed(2)
+				if (user?.height && value) {
+					heightSquared = (user?.height / 100) ** 2
+					log({heightSquared})
+					bmi = (value / heightSquared).toFixed(2)
+				}
 				setUser((user) => {
 					return {...user, [name]: value, bmi}
 				})
@@ -20,8 +25,12 @@ const AddUser = () => {
 				break
 
 			case 'height':
+				if (value && user.weight) {
+					heightSquared = (value / 100) ** 2
+					log({heightSquared})
+					bmi = (user?.weight / heightSquared).toFixed(2)
+				}
 				idealWeight = idealWeightFn(value, user?.gender)
-				bmi = (user?.weight / ((user?.height / 100) ^ 2)).toFixed(2)
 
 				setUser((user) => {
 					return {...user, [name]: value, bmi, idealWeight}
@@ -48,15 +57,16 @@ const AddUser = () => {
 		// >> IDEAL WEIGHT FORMULA
 		// const idealWeight = idealWeightFn(user?.height, user?.gender)
 		// >> BMI FORMULA:
-		// const bmi = (user?.weight / ((user?.height / 100) ^ 2)).toFixed(2)
+		// const bmi = (user?.weight / ((user?.height / 100) ** 2)).toFixed(2)
 	}
-	const showBmi = user?.weight && user?.height
 
 	const submit = () => {}
 
 	const cancel = () => {
 		setShow(!show)
 	}
+
+	const showBmi = user?.weight && user?.height
 
 	return show ? (
 		<div>
