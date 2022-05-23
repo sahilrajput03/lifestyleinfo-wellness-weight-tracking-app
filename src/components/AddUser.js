@@ -70,7 +70,7 @@ const AddUser = () => {
 	const showBmi = user?.weight && user?.height
 
 	return show ? (
-		<div className='max-w-lg m-auto'>
+		<div className='max-w-lg m-auto bg-white shadow-md rounded px-8 pt-6 mt-5 pb-8 mb-4'>
 			{false && (
 				<>
 					<span className='font-bold underline'>Sahil Stats:</span>
@@ -82,6 +82,8 @@ const AddUser = () => {
 					<br />
 				</>
 			)}
+			<h2 className='text-2xl font-bold text-center'>User Profile</h2>
+
 			<div className='field-container'>
 				<span className='field'>Name</span> <input className='field-input' name='name' placeholder='Enter name here..' onChange={onChange} value={user?.name} />
 			</div>
@@ -95,14 +97,17 @@ const AddUser = () => {
 				</form>
 			</div>
 			<div className='field-container'>
-				<span className='field'>Age</span> <input name='age' className='field-input' placeholder='Enter age here..' onChange={onChange} value={user?.age} />
+				<span className='field'>Birth</span> <input name='birth' className='field-input' placeholder='22/03/1983' onChange={onChange} value={user?.age} />
+			</div>
+			<div className='field-container'>
+				<span className='field'>Age</span> {user?.age ? user.age : <span className='text-gray-400 mr-8'>Please enter your DOB ..</span>}
 			</div>
 			<div className='field-container'>
 				<span className='field'>Weight (kg)</span>
-				<input name='weight' className='field-input' placeholder='Enter weight here..' onChange={onChange} value={user?.weight} />
+				<input name='weight' className='field-input' type='number' placeholder='Enter weight here..' onChange={onChange} value={user?.weight} />
 			</div>
 			<div className='field-container'>
-				<span className='field'>Height (cms)</span> <input name='height' className='field-input' placeholder='Enter height here..' onChange={onChange} value={user?.height} />
+				<span className='field'>Height (cms)</span> <input name='height' className='field-input' type='number' placeholder='Enter height here..' onChange={onChange} value={user?.height} />
 			</div>
 			<div className='field-container'>
 				<span className='field'>BMI</span> {showBmi ? user.bmi : <span className='text-gray-400'>Please enter height and weight first..</span>}
@@ -118,10 +123,10 @@ const AddUser = () => {
 			</button>
 			{debug ? <pre>{JSON.stringify(user, null, 2)}</pre> : null}
 			<br />
-			<span className='font-bold text-gray-700'>Tips -</span>
-			<br />
+			<div className='font-bold text-gray-700 mt-5'>Tips </div>
 			<li className='italic text-gray-500'>Conversions: 1ft = 12inch = 30.48cms</li>
-			<li className='italic text-gray-500'>Formula: weight(kg)/height(m), Unit: kg/m²</li>
+			<li className='italic text-gray-500'>Ideal body weight: male = (50 + 2.3*(h-60)inch) and female = (45.5 + 2.3*(h-60)inch)</li>
+			<li className='italic text-gray-500'>BMI Formula: weight(kg)/height(m), Unit: kg/m²</li>
 			<li className='italic text-gray-500'>BMI ranges below 18.5 means you're in the underweight range. </li>
 			<li className='italic text-gray-500'>
 				Between <b>18.5 and 24.9</b> means you're in the healthy weight range.
