@@ -4,6 +4,8 @@ Reference Article: https://blog.logrocket.com/using-chart-js-react
 
 React-chartjs-2: https://react-chartjs-2.js.org/examples/line-chart/
 
+Chart.js - [Click here](https://www.chartjs.org/docs/latest/)
+
 Mongodb web-sdk: https://www.mongodb.com/docs/realm/web/#std-label-web-intro
 
 Mongodb driver docs: https://mongodb.github.io/node-mongodb-native/4.5/

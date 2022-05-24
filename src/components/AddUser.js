@@ -127,9 +127,9 @@ const AddUser = ({USER = null, SHOW = false, CB = () => {}}) => {
 			<div className='field-container'>
 				<span className='field'>Gender</span>
 				<form className='field-input border-none' onChange={onChange}>
-					<input name='gender' type='radio' value='male' checked={user.gender === 'male'} />
+					<input name='gender' type='radio' value='male' onChange={() => {}} checked={user?.gender === 'male'} />
 					<label htmlFor='male'>Male</label>
-					<input name='gender' type='radio' value='female' className='ml-2' checked={user.gender === 'female'} />
+					<input name='gender' type='radio' value='female' onChange={() => {}} className='ml-2' checked={user?.gender === 'female'} />
 					<label htmlFor='female'>Female</label>
 				</form>
 			</div>

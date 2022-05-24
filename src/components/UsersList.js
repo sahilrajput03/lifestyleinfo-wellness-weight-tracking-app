@@ -5,7 +5,7 @@ const UsersList = ({users}) => {
 			{users &&
 				users.map((user) => {
 					return (
-						<div className=''>
+						<div key={user._id.toString()} className=''>
 							<div className='font-bold'>{user.name}</div>
 							<div>Age: {user.age}</div>
 							<div> Height:{user.height}</div>
