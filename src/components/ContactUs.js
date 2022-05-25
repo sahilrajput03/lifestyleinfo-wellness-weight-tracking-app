@@ -21,24 +21,22 @@ const iconStyle = {
 
 const ContactUs = () => {
 	return (
-		<>
-			<div className='flex flex-wrap'>
-				<a href={whatsAppMessageLink} className='btn-contact'>
-					Chat on Whatsapp <BsWhatsapp {...iconStyle} />
-				</a>
-				<a href={callLink} className='btn-contact'>
-					Call our Coach
-					<AiFillPhone {...iconStyle} />
-				</a>
-				<a href={messageLink} className='btn-contact'>
-					Send a text message
-					<AiFillMessage {...iconStyle} />
-				</a>
-				<a href={mailLink} className='btn-contact'>
-					Email Us <AiFillMail {...iconStyle} />
-				</a>
-			</div>
-		</>
+		<div className='flex flex-wrap justify-center'>
+			<a href={whatsAppMessageLink} className='btn-contact'>
+				Chat on Whatsapp <BsWhatsapp {...iconStyle} />
+			</a>
+			<a href={callLink} className='btn-contact'>
+				Call our Coach
+				<AiFillPhone {...iconStyle} />
+			</a>
+			<a href={messageLink} className='btn-contact'>
+				Send a text message
+				<AiFillMessage {...iconStyle} />
+			</a>
+			<a href={mailLink} className='btn-contact'>
+				Email Us <AiFillMail {...iconStyle} />
+			</a>
+		</div>
 	)
 }
 
