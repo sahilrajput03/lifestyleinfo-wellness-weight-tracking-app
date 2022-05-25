@@ -10,10 +10,18 @@ const NavBar = () => {
 				paddingBottom: '1rem',
 			}}
 		>
-			<h1 className='font-bold text-2xl text-pink-600 text-center'>New Life Style Wellness Centre</h1>
+			<Title />
 			<PageLinks />
 			<ContactUs />
 		</nav>
+	)
+}
+
+const Title = () => {
+	return (
+		<Link to={paths.home}>
+			<h1 className='font-bold text-2xl text-pink-600 text-center'>New Life Style Wellness Centre</h1>
+		</Link>
 	)
 }
 

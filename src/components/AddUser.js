@@ -2,7 +2,7 @@ import {useState} from 'react'
 
 let log = console.log
 
-const AddUser = ({USER = null, SHOW = false, CB = () => {}}) => {
+const AddUser = ({USER = null, SHOW = false}) => {
 	const [show, setShow] = useState(SHOW)
 	const [user, setUser] = useState(USER)
 	const [debug, setDebug] = useState(false)
@@ -91,7 +91,6 @@ const AddUser = ({USER = null, SHOW = false, CB = () => {}}) => {
 			}
 			setUser(null)
 			setShow(false)
-			CB()
 		} catch (error) {
 			alert('Failed..')
 			log(error)
@@ -101,7 +100,6 @@ const AddUser = ({USER = null, SHOW = false, CB = () => {}}) => {
 	const cancel = () => {
 		setShow(!show)
 		setUser(null)
-		CB()
 	}
 
 	const showBmi = user?.weight && user?.height

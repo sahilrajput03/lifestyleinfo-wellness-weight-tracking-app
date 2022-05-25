@@ -2,7 +2,7 @@ import {CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, Point
 import React, {useState} from 'react'
 import {Line} from 'react-chartjs-2'
 import useUsersContext from './contexts/useUsersContext'
-import ContactUs from './components/ContactUs'
+import Loading from './components/Loading'
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
 
@@ -105,6 +105,10 @@ const Graphs = () => {
 			// return {...data}
 		})
 	}
+
+	// debug loading gif..
+	// return <Loading />
+
 	return users ? (
 		<div className='max-w-7xl m-auto border-2 box-border'>
 			<Line
@@ -118,7 +122,7 @@ const Graphs = () => {
 			<button onClick={addRandomData}>Add data</button>
 		</div>
 	) : (
-		'Loading..'
+		<Loading />
 	)
 }
 

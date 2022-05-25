@@ -1,29 +1,14 @@
 import {useState} from 'react'
 import useUsersContext from '../contexts/useUsersContext'
 import AddUser from './AddUser'
+import Loading from './Loading'
 
 let log = console.log
 
 const EditUser = () => {
 	const [users] = useUsersContext()
-	const [showList, setShowList] = useState(null)
 
-	const toggleList = () => {
-		setShowList(!showList)
-	}
-
-	return showList ? (
-		<>
-			<List users={users} toggleList={toggleList} />
-			<button className='btn-secondary' onClick={toggleList}>
-				Close List
-			</button>
-		</>
-	) : (
-		<button className='btn-primary block mt-5' onClick={toggleList}>
-			Edit User
-		</button>
-	)
+	return users ? <List users={users} /> : <Loading />
 }
 
 const List = ({users, toggleList}) => {
@@ -37,7 +22,7 @@ const List = ({users, toggleList}) => {
 	}
 
 	return selected ? (
-		<AddUser USER={selected} SHOW={true} CB={toggleList} />
+		<AddUser USER={selected} SHOW={true} />
 	) : (
 		<div>
 			{users.map((u) => (
