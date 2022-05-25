@@ -10,6 +10,8 @@ Mongodb web-sdk: https://www.mongodb.com/docs/realm/web/#std-label-web-intro
 
 Mongodb driver docs: https://mongodb.github.io/node-mongodb-native/4.5/
 
+React router dom v6: https://reactrouter.com/docs/en/v6/getting-started/tutorial#nested-routes
+
 - realm-web docs: https://www.mongodb.com/docs/realm/web/quickstart/
 
 - inspiration: https://youtu.be/Evp3xTzWCu4?list=PL4RCxklHWZ9v2lcat4oEVGQhZg6r4IQGV

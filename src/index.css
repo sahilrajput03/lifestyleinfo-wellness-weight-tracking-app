@@ -28,7 +28,7 @@
 		@apply border border-gray-200 focus:outline-gray-400 p-1 rounded-md text-gray-600 text-center w-[+250px];
 		/* to remove focus outline use: focus:outline-none */
 	}
-	* {
-		@apply box-border;
+	.underline-page-tab {
+		@apply underline decoration-[+3px] decoration-pink-400 font-bold;
 	}
 }

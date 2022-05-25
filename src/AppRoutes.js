@@ -5,6 +5,7 @@ import EditUser from './components/EditUser'
 import NavBar from './components/NavBar'
 import UsersList from './components/UsersList'
 import useUsers from './hooks/useUsers'
+import paths from './utils/paths'
 
 const AppRoutes = () => {
 	const [users] = useUsers(null) // initializing context and load data on mount.
@@ -13,10 +14,10 @@ const AppRoutes = () => {
 		<BrowserRouter>
 			<NavBar />
 			<Routes>
-				<Route path='/' element={<App />} />
-				<Route path='add-user' element={<AddUser />} />
-				<Route path='edit-user' element={<EditUser />} />
-				<Route path='user-list' element={<UsersList />} />
+				<Route path={paths.home} element={<App />} />
+				<Route path={paths.addUser} element={<AddUser />} />
+				<Route path={paths.editUser} element={<EditUser />} />
+				<Route path={paths.userList} element={<UsersList />} />
 			</Routes>
 		</BrowserRouter>
 	)
