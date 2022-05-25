@@ -30,13 +30,6 @@ export const options = {
 				},
 			},
 		},
-		x: {
-			ticks: {
-				callback: function (value, index, ticks) {
-					return value + ' May'
-				},
-			},
-		},
 	},
 	// src: https://stackoverflow.com/a/42573360/10012446
 	animation: {
@@ -44,22 +37,30 @@ export const options = {
 	},
 }
 
-// const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July']
-// const labels = ['Monday', 'Tuesday', 'Wednesday', 'Thurday', 'Friday', 'Saturday', 'Sunday']
 const getDaysInaMonth = (year, month) => {
 	return new Date(year, month + 1, 0).getDate() // 28
 }
 
 const getLabels = (year, month) => {
 	const labels = []
-	for (let i = 1; i <= getDaysInaMonth(year, month) + 1; i++) {
-		labels.push(i)
+	// for (let i = 1; i <= getDaysInaMonth(year, month); i++) {
+	for (let i = 1; i <= getDaysInaMonth(year, month); i++) {
+		// const date = new Date(2009, 4, 20); // 20 May 2009
+		const date = new Date(year, month, 1) // 1 _month_ _year_
+		const monthName = date.toLocaleString('default', {month: 'long'})
+		labels.push(i + ' ' + monthName)
 	}
 	return labels
 }
 
+let labels = getLabels(2022, 4) // may=4 in javascript
+// const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July']
+// const labels = ['Monday', 'Tuesday', 'Wednesday', 'Thurday', 'Friday', 'Saturday', 'Sunday']
+
+log('labels??', getLabels(2022, 4))
+
 export const initData = {
-	labels: getLabels(2022, 4),
+	labels,
 	datasets: [
 		{
 			label: 'Sahil',

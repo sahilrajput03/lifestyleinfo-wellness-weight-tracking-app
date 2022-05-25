@@ -18,7 +18,7 @@ const EditUser = ({users}) => {
 			</button>
 		</>
 	) : (
-		<button className='btn-primary' onClick={toggleList}>
+		<button className='btn-primary block mt-5' onClick={toggleList}>
 			Edit User
 		</button>
 	)
