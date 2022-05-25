@@ -1,11 +1,12 @@
 import {useState} from 'react'
+import {useNavigate} from 'react-router-dom'
 
 let log = console.log
 
-const AddUser = ({USER = null, SHOW = false}) => {
-	const [show, setShow] = useState(SHOW)
+const AddUser = ({USER = null}) => {
 	const [user, setUser] = useState(USER)
 	const [debug, setDebug] = useState(false)
+	let navigate = useNavigate()
 
 	window.user = user
 
@@ -90,7 +91,6 @@ const AddUser = ({USER = null, SHOW = false}) => {
 				alert('User Created!')
 			}
 			setUser(null)
-			setShow(false)
 		} catch (error) {
 			alert('Failed..')
 			log(error)
@@ -98,14 +98,15 @@ const AddUser = ({USER = null, SHOW = false}) => {
 	}
 
 	const cancel = () => {
-		setShow(!show)
 		setUser(null)
+		navigate('/')
+		// go to home now.>// todo:
 	}
 
 	const showBmi = user?.weight && user?.height
 
-	return show ? (
-		<div className='flex-col max-w-lg m-auto bg-white shadow-lg rounded px-8 pt-6 mt-5 pb-8 mb-4'>
+	return (
+		<div className='card-center'>
 			{false && (
 				<>
 					<span className='font-bold underline'>Sahil Stats:</span>
@@ -117,7 +118,7 @@ const AddUser = ({USER = null, SHOW = false}) => {
 					<br />
 				</>
 			)}
-			<h2 className='text-2xl font-bold text-center'>User Profile</h2>
+			<h1>User Profile</h1>
 
 			<div className='field-container'>
 				<span className='field'>Name</span> <input className='field-input' name='name' placeholder='Enter name here..' onChange={onChange} value={user?.name || ''} />
@@ -174,10 +175,6 @@ const AddUser = ({USER = null, SHOW = false}) => {
 				<button onClick={() => setDebug(!debug)}>Debug?</button>
 			</div>
 		</div>
-	) : (
-		<button className='btn-primary' onClick={() => setShow(!show)}>
-			Add user
-		</button>
 	)
 }
 // IDEAL BODY WEIGHT: male(50 + 2.3*(h-60)inch) and female(45.5 + 2.3*(h-60)inch)

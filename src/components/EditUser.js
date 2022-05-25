@@ -22,12 +22,13 @@ const List = ({users, toggleList}) => {
 	}
 
 	return selected ? (
-		<AddUser USER={selected} SHOW={true} />
+		<AddUser USER={selected} />
 	) : (
-		<div>
-			{users.map((u) => (
-				<button key={u._id.toString()} onClick={onClick(u.name)}>
-					{u.name}
+		<div className='card-center'>
+			<h1>Select a user</h1>
+			{users.map((usr, idx) => (
+				<button className='block m-auto' key={usr._id.toString()} onClick={onClick(usr.name)}>
+					{`${idx + 1}. ${usr.name}`}
 				</button>
 			))}
 		</div>

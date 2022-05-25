@@ -20,28 +20,36 @@ const NavBar = () => {
 const Title = () => {
 	return (
 		<Link to={paths.home}>
-			<h1 className='font-bold text-2xl text-pink-600 text-center'>New Life Style Wellness Centre</h1>
+			<div className='hero-title'>New Life Style Wellness Centre</div>
 		</Link>
 	)
 }
 
 const PageLinks = () => {
 	const {pathname} = useLocation()
+
+	let style = {
+		home: paths.home === pathname ? 'underline-page-tab ' : '',
+		addUser: paths.addUser === pathname ? 'underline-page-tab ' : '',
+		editUser: paths.editUser === pathname ? 'underline-page-tab ' : '',
+		userList: paths.userList === pathname ? 'underline-page-tab ' : '',
+	}
+
 	return (
-		<div className='text-center'>
-			<Link to={paths.home} className={paths.home === pathname ? 'underline-page-tab' : ''}>
+		<div className='text-center mb-5'>
+			<Link to={paths.home} className={style.home + 'tab'}>
 				Home
 			</Link>{' '}
 			|{' '}
-			<Link to={paths.addUser} className={paths.addUser === pathname ? 'underline-page-tab' : ''}>
-				Add user
+			<Link to={paths.addUser} className={style.addUser + 'tab'}>
+				Add user{' '}
 			</Link>
 			|{' '}
-			<Link to={paths.editUser} className={paths.editUser === pathname ? 'underline-page-tab' : ''}>
+			<Link to={paths.editUser} className={style.editUser + 'tab'}>
 				Edit User
 			</Link>{' '}
 			|{' '}
-			<Link to={paths.userList} className={paths.userList === pathname ? 'underline-page-tab' : ''}>
+			<Link to={paths.userList} className={style.userList + 'tab'}>
 				Users List
 			</Link>
 		</div>

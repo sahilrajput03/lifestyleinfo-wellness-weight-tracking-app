@@ -110,7 +110,8 @@ const Graphs = () => {
 	// return <Loading />
 
 	return users ? (
-		<div className='max-w-7xl m-auto border-2 box-border'>
+		<div className='max-w-7xl m-auto mt-5 rounded-xl box-shadow'>
+			<h1>Weight Graphs</h1>
 			<Line
 				className='line-graph'
 				options={options}
