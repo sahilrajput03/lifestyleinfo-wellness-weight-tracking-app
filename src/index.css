@@ -32,6 +32,6 @@
 		@apply underline decoration-[+3px] decoration-pink-400 font-bold;
 	}
 	.btn-contact {
-		@apply btn-primary mr-2;
+		@apply btn-primary mr-2 mt-2;
 	}
 }

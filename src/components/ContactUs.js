@@ -1,7 +1,7 @@
 import {AiFillMessage, AiFillMail, AiFillPhone} from 'react-icons/ai'
 import {BsWhatsapp} from 'react-icons/bs'
 
-const MOBILE = 123
+const MOBILE = 8360267243
 const EMAIL = 'my_email'
 
 const text = encodeURI('Hi, New Life Style Wellness Centre. I want to know more about it.')
@@ -22,23 +22,22 @@ const iconStyle = {
 const ContactUs = () => {
 	return (
 		<>
-			<a href={whatsAppMessageLink} className='btn-contact'>
-				Chat on Whatsapp <BsWhatsapp {...iconStyle} />
-			</a>
-
-			<a href={callLink} className='btn-contact'>
-				Call our Coach
-				<AiFillPhone {...iconStyle} />
-			</a>
-
-			<a href={messageLink} className='btn-contact'>
-				Send a tex message
-				<AiFillMessage {...iconStyle} />
-			</a>
-
-			<a href={mailLink} className='btn-contact'>
-				Email Us <AiFillMail {...iconStyle} />
-			</a>
+			<div className='flex flex-wrap'>
+				<a href={whatsAppMessageLink} className='btn-contact'>
+					Chat on Whatsapp <BsWhatsapp {...iconStyle} />
+				</a>
+				<a href={callLink} className='btn-contact'>
+					Call our Coach
+					<AiFillPhone {...iconStyle} />
+				</a>
+				<a href={messageLink} className='btn-contact'>
+					Send a text message
+					<AiFillMessage {...iconStyle} />
+				</a>
+				<a href={mailLink} className='btn-contact'>
+					Email Us <AiFillMail {...iconStyle} />
+				</a>
+			</div>
 		</>
 	)
 }
