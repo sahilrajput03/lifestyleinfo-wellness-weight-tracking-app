@@ -1,9 +1,9 @@
+import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import App from './App'
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import AddUser from './components/AddUser'
 import EditUser from './components/EditUser'
+import NavBar from './components/NavBar'
 import UsersList from './components/UsersList'
-import useUsersContext from './contexts/useUsersContext'
 import useUsers from './hooks/useUsers'
 
 const AppRoutes = () => {
@@ -11,6 +11,7 @@ const AppRoutes = () => {
 
 	return (
 		<BrowserRouter>
+			<NavBar />
 			<Routes>
 				<Route path='/' element={<App />} />
 				<Route path='add-user' element={<AddUser />} />

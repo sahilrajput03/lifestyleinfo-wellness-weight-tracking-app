@@ -1,8 +1,6 @@
-import React, {useEffect, useState} from 'react'
-import {Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js'
+import {CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, PointElement, Title, Tooltip} from 'chart.js'
+import React, {useState} from 'react'
 import {Line} from 'react-chartjs-2'
-import UsersList from './components/UsersList'
-import useUsers from './hooks/useUsers'
 import useUsersContext from './contexts/useUsersContext'
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
@@ -56,7 +54,7 @@ let labels = getLabels(2022, 4) // may=4 in javascript
 // const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July']
 // const labels = ['Monday', 'Tuesday', 'Wednesday', 'Thurday', 'Friday', 'Saturday', 'Sunday']
 
-log('labels??', getLabels(2022, 4))
+// log('labels??', getLabels(2022, 4))
 
 export const initData = {
 	labels,
@@ -77,6 +75,14 @@ export const initData = {
 }
 
 function App() {
+	return (
+		<div>
+			<Graphs />
+		</div>
+	)
+}
+
+const Graphs = () => {
 	const [data, setData] = useState(initData)
 	const [users] = useUsersContext()
 
@@ -98,7 +104,6 @@ function App() {
 			// return {...data}
 		})
 	}
-
 	return users ? (
 		<div className='max-w-7xl m-auto border-2 box-border'>
 			<Line
