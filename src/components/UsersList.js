@@ -1,4 +1,8 @@
-const UsersList = ({users}) => {
+import useUsersContext from '../contexts/useUsersContext'
+
+const UsersList = () => {
+	const [users] = useUsersContext()
+
 	return (
 		<>
 			<h2 className='font-bold text-2xl'>Users</h2>

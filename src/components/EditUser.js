@@ -1,9 +1,11 @@
 import {useState} from 'react'
+import useUsersContext from '../contexts/useUsersContext'
 import AddUser from './AddUser'
 
 let log = console.log
 
-const EditUser = ({users}) => {
+const EditUser = () => {
+	const [users] = useUsersContext()
 	const [showList, setShowList] = useState(null)
 
 	const toggleList = () => {

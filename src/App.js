@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import {Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend} from 'chart.js'
 import {Line} from 'react-chartjs-2'
-import * as Realm from 'realm-web'
 import UsersList from './components/UsersList'
-import AddUser from './components/AddUser'
-import EditUser from './components/EditUser'
+import useUsers from './hooks/useUsers'
+import useUsersContext from './contexts/useUsersContext'
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
 
@@ -78,31 +77,10 @@ export const initData = {
 }
 
 function App() {
-	const [user, setUser] = useState(null)
-	const [users, setUsers] = useState(null)
 	const [data, setData] = useState(initData)
+	const [users] = useUsersContext()
 
-	useEffect(() => {
-		async function main() {
-			const app = new Realm.App({id: process.env.REACT_APP_REALM_APP_ID})
-			const credentials = Realm.Credentials.anonymous()
-			try {
-				const userMongo = await app.logIn(credentials)
-				window.userMongo = userMongo // true global state solution.. ~ Sahil,
-				// console.log('got user', user)
-
-				const allUsers = await userMongo.functions.getAllUsers()
-				console.log('allUsers', allUsers)
-				setUsers(allUsers)
-			} catch (err) {
-				console.error('Failed to log in', err)
-			}
-		}
-
-		main()
-	}, [])
-
-	const onClick = () => {
+	const addRandomData = () => {
 		setData((data) => {
 			// data.datasets[0].data.push(Math.random() * 10)
 
@@ -123,8 +101,6 @@ function App() {
 
 	return users ? (
 		<div className='max-w-7xl m-auto border-2 box-border'>
-			<AddUser />
-			<EditUser users={users} />
 			<Line
 				className='line-graph'
 				options={options}
@@ -133,8 +109,7 @@ function App() {
 					log('hell..??', e.target.value)
 				}}
 			/>
-			<UsersList users={users} />
-			<button onClick={onClick}>Add data</button>
+			<button onClick={addRandomData}>Add data</button>
 		</div>
 	) : (
 		'Loading..'
