@@ -2,6 +2,7 @@ import {CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, Point
 import React, {useState} from 'react'
 import {Line} from 'react-chartjs-2'
 import useUsersContext from './contexts/useUsersContext'
+import ContactUs from './components/ContactUs'
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
 
@@ -74,18 +75,10 @@ export const initData = {
 	],
 }
 
-const text = encodeURI('Hi, New Life Style Wellness Centre.')
-const mobile = 8360267243
-
-const whatsAppMessageLink = `https://api.whatsapp.com/send?phone=+91${mobile}&text=${text}`
-
 function App() {
 	return (
 		<div>
 			<Graphs />
-			<a href={whatsAppMessageLink} className='btn-primary'>
-				Chat with us on whatsapp
-			</a>
 		</div>
 	)
 }

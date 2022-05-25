@@ -16,6 +16,8 @@ React router dom v6: https://reactrouter.com/docs/en/v6/getting-started/tutorial
 
 - inspiration: https://youtu.be/Evp3xTzWCu4?list=PL4RCxklHWZ9v2lcat4oEVGQhZg6r4IQGV
 
+- React Icons: https://react-icons.github.io/react-icons/
+
 # mongodb-realm functions
 
 db: `newlifestyle`

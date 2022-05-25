@@ -1,5 +1,6 @@
 import {Link, useLocation} from 'react-router-dom'
 import paths from '../utils/paths'
+import ContactUs from './ContactUs'
 
 const NavBar = () => {
 	const {pathname} = useLocation()
@@ -28,6 +29,8 @@ const NavBar = () => {
 				Users List
 			</Link>
 			<br />
+			<br />
+			<ContactUs />
 		</nav>
 	)
 }
