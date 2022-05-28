@@ -14,7 +14,6 @@ const useUsers = (value) => {
 				const userMongo = await app.logIn(credentials)
 				window.userMongo = userMongo // true global state solution.. ~ Sahil,
 				// console.log('got user', user)
-
 				const allUsers = await userMongo.functions.getAllUsers()
 				console.log('allUsers', allUsers)
 				setUsers(allUsers)

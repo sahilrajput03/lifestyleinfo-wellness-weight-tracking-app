@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
+import useRefetchUsers from '../hooks/useRefetchUsers'
 
 let log = console.log
 
@@ -7,6 +8,7 @@ const AddUser = ({USER = null}) => {
 	const [user, setUser] = useState(USER)
 	const [debug, setDebug] = useState(false)
 	let navigate = useNavigate()
+	const refetchUsers = useRefetchUsers()
 
 	window.user = user
 
@@ -91,6 +93,8 @@ const AddUser = ({USER = null}) => {
 				alert('User Created!')
 			}
 			setUser(null)
+			refetchUsers()
+			navigate('/')
 		} catch (error) {
 			alert('Failed..')
 			log(error)

@@ -5,6 +5,7 @@ import EditUser from './components/EditUser'
 import NavBar from './components/NavBar'
 import UsersList from './components/UsersList'
 import useUsers from './hooks/useUsers'
+import UpdateStats from './components/UpdateStats'
 import paths from './utils/paths'
 
 const AppRoutes = () => {
@@ -18,6 +19,7 @@ const AppRoutes = () => {
 				<Route path={paths.addUser} element={<AddUser />} />
 				<Route path={paths.editUser} element={<EditUser />} />
 				<Route path={paths.userList} element={<UsersList />} />
+				<Route path={paths.updateStats} element={<UpdateStats />} />
 			</Routes>
 		</BrowserRouter>
 	)

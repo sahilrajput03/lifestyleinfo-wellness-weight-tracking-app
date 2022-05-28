@@ -10,7 +10,7 @@ const NavBar = () => {
 				paddingBottom: '1rem',
 			}}
 		>
-			<Title />
+			{/* <Title /> */}
 			<PageLinks />
 			<ContactUs />
 		</nav>
@@ -33,6 +33,7 @@ const PageLinks = () => {
 		addUser: paths.addUser === pathname ? 'underline-page-tab ' : '',
 		editUser: paths.editUser === pathname ? 'underline-page-tab ' : '',
 		userList: paths.userList === pathname ? 'underline-page-tab ' : '',
+		updateStats: paths.updateStats === pathname ? 'underline-page-tab ' : '',
 	}
 
 	return (
@@ -43,7 +44,7 @@ const PageLinks = () => {
 			|{' '}
 			<Link to={paths.addUser} className={style.addUser + 'tab'}>
 				Add user{' '}
-			</Link>
+			</Link>{' '}
 			|{' '}
 			<Link to={paths.editUser} className={style.editUser + 'tab'}>
 				Edit User
@@ -51,6 +52,10 @@ const PageLinks = () => {
 			|{' '}
 			<Link to={paths.userList} className={style.userList + 'tab'}>
 				Users List
+			</Link>{' '}
+			|{' '}
+			<Link to={paths.updateStats} className={style.updateStats + 'tab'}>
+				Update Stats
 			</Link>
 		</div>
 	)

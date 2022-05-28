@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import useUsersContext from '../contexts/useUsersContext'
-import AddUser from './AddUser'
 import Loading from './Loading'
+import UserStats from './UserStats'
 
 let log = console.log
 
@@ -20,7 +20,7 @@ const List = ({users, toggleList}) => {
 	}
 
 	return selected ? (
-		<AddUser USER={selected} />
+		<UserStats USER={selected} />
 	) : (
 		<div className='card-center'>
 			<h1>Select a user</h1>

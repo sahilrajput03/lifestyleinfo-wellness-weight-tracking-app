@@ -1,16 +1,18 @@
+import {useState} from 'react'
 import useUsersContext from '../contexts/useUsersContext'
 
 const UsersList = () => {
 	const [users] = useUsersContext()
+	const [debug, setDebug] = useState(false)
 
 	return (
 		<div className='card-center'>
 			<h1>Users</h1>
-			<div className='flex justify-center'>
+			<div className='flex-col justify-center'>
 				{users &&
 					users.map((user) => {
 						return (
-							<div key={user._id.toString()} className='flex'>
+							<div key={user._id.toString()} className='flex mb-5'>
 								<div className='mr-10'>
 									<div className='font-bold'>{user.name}</div>
 									<div>Age: {user.age}</div>
@@ -26,6 +28,11 @@ const UsersList = () => {
 							</div>
 						)
 					})}
+			</div>
+			{debug ? <pre>{JSON.stringify(users, null, 2)}</pre> : null}
+			<br />
+			<div className='flex justify-end'>
+				<button onClick={() => setDebug(!debug)}>Debug?</button>
 			</div>
 		</div>
 	)
