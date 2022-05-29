@@ -20,8 +20,8 @@
 	},
 	"scripts": {
 		"start": "react-scripts start",
-		"?prebuild": "rm -rf ?? fix the cname",
-		"build": "react-scripts build; mv build docs",
+		"prebuild": "rm -rf build docs",
+		"build": "react-scripts build; mv build docs; cp CNAME docs/",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"
 	},
