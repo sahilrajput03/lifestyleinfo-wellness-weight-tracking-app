@@ -37,10 +37,20 @@ exports = function (arg) {
 	return 'ok'
 }
 
+// deleteUser
+
 // getOneUser
 exports = function (arg) {
 	let collection = context.services.get('mongodb-atlas').db('newlifestyle').collection('users')
 	return collection.findOne({_id: BSON.ObjectId('628b36217a6c0126c895f85d')})
+}
+
+// deleteUser
+// Usage: exports('6292bc817033163290c29db7')
+exports = async function (arg) {
+	var collection = context.services.get('mongodb-atlas').db('newlifestyle').collection('users')
+	let result = await collection.deleteOne({_id: BSON.ObjectId(arg)})
+	return 'ok'
 }
 
 // getAllUsers
