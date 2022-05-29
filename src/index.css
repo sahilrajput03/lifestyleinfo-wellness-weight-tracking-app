@@ -52,4 +52,8 @@
 	.card-center {
 		@apply flex-col max-w-lg m-auto box-shadow;
 	}
+
+	.btn-red {
+		@apply text-red-500 border-red-500 hover:bg-red-600;
+	}
 }

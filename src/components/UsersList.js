@@ -1,9 +1,11 @@
 import {useState} from 'react'
 import useUsersContext from '../contexts/useUsersContext'
+import useRefetchUsers from '../hooks/useRefetchUsers'
 
 const UsersList = () => {
 	const [users] = useUsersContext()
 	const [debug, setDebug] = useState(false)
+	const refetchUsers = useRefetchUsers()
 
 	return (
 		<div className='card-center'>
@@ -11,6 +13,14 @@ const UsersList = () => {
 			<div className='flex-col justify-center'>
 				{users &&
 					users.map((user) => {
+						const deleteUser = async () => {
+							let userMongo = window.userMongo
+
+							await userMongo.functions.deleteUser(user._id.toString())
+							await refetchUsers()
+							alert('User Deleted!')
+						}
+
 						return (
 							<div key={user._id.toString()} className='flex mb-5'>
 								<div className='mr-10'>
@@ -18,6 +28,9 @@ const UsersList = () => {
 									<div>Age: {user.age}</div>
 									<div>Birth: {user.birth}</div>
 									<div>Gender: {user.gender}</div>
+									<button className='btn-secondary btn-red py-0 px-2' onClick={deleteUser}>
+										Delete User
+									</button>
 								</div>
 								<div>
 									<div>Height:{user.height}</div>

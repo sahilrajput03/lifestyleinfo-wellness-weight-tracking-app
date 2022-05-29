@@ -80,11 +80,6 @@ const AddUser = ({USER = null}) => {
 		let userMongo = window.userMongo
 		log('submit button pressed..')
 		try {
-			const allUsers = await userMongo.functions.getAllUsers(user)
-			// allUsers.map(u => u._id.toString()) // get string _id's
-			// const allNames = allUsers.map((u) => u.name.toLowerCase())
-			// const duplicateUser = allNames.includes(user?.name.toLowerCase())
-
 			if (user._id) {
 				await userMongo.functions.updateUser({id: user._id.toString(), update: user})
 				alert('User updated!')
