@@ -18,7 +18,8 @@ export const options = {
 		},
 		title: {
 			display: true,
-			text: 'New Life Style Wellness Centre',
+			// text: 'New Life Style Wellness Centre',
+			// ^^^ We don't need this title text.
 		},
 	},
 	// vvv src: https://www.chartjs.org/docs/latest/axes/labelling.html
@@ -162,6 +163,8 @@ const Graphs = () => {
 
 			{users ? (
 				<>
+					<h1>Weight Graphs</h1>
+
 					{users.map((user, idx) => {
 						let monthData = user.stats?.[filter.year]?.[filter.month]?.[filter.metric]?.split(',')
 						// let data = initData(user.name, monthData, getLabels(2022, 4))
@@ -169,7 +172,6 @@ const Graphs = () => {
 
 						return monthData ? (
 							<div key={idx} className='max-w-7xl m-auto mt-5 rounded-xl box-shadow'>
-								<h1>Weight Graphs</h1>
 								<Line
 									className='line-graph'
 									options={options}
