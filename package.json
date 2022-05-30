@@ -23,6 +23,7 @@
 		"prebuild": "rm -rf build docs",
 		"build": "react-scripts build",
 		"postbuild": "mv build docs; cp ghPagesSeup/* docs/ ",
+		"makebuild": "git add -A; git commit -m 'Make build with husky (git-hook: pre-push) ~Sahil.'",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
 		"prepare": "husky install"
