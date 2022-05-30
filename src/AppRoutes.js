@@ -4,12 +4,12 @@ import AddUser from './components/AddUser'
 import EditUser from './components/EditUser'
 import NavBar from './components/NavBar'
 import UsersList from './components/UsersList'
-import useUsers from './hooks/useUsers'
+import useSetupUsers from './hooks/useSetupUsers'
 import UpdateStats from './components/UpdateStats'
 import paths from './utils/paths'
 
 const AppRoutes = () => {
-	const [users] = useUsers(null) // initializing context and load data on mount.
+	const [users] = useSetupUsers(null) // initializing context and load data on mount.
 
 	return (
 		<BrowserRouter>

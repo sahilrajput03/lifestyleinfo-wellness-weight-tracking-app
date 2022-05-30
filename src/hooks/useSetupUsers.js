@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react'
 import * as Realm from 'realm-web'
 import useUsersContext from '../contexts/useUsersContext'
 
-const useUsers = (value) => {
+const useSetupUsers = (value) => {
 	// const [users, setUsers] = useState(null)
 	const [users, setUsers] = useUsersContext(value)
 
@@ -28,4 +28,4 @@ const useUsers = (value) => {
 	return [users, setUsers]
 }
 
-export default useUsers
+export default useSetupUsers
