@@ -149,21 +149,18 @@ const Graphs = () => {
 
 	return (
 		<>
-			<br />
-			<div>
-				<h1 className='ml-0 text-left mb-1'>Filter</h1>
-				<span className='field'>Month</span> <input className='field-input w-[+150px]' name='month' placeholder='Enter month here..' onChange={onChange} value={filter.month === '' ? '' : filter.month + 1} />
-				<span className='field ml-10'>Year</span> <input className='field-input w-[+150px]' name='year' placeholder='Enter year here..' onChange={onChange} value={filter.year} />
-				<span className='field ml-10'>Metric</span> <Select value={selectValue} options={optionsSelect} onChange={setMetric} className={'w-[+150px] inline-block ml-5'} />
-				<button className='ml-5 btn-secondary' onClick={resetFilter}>
-					Goto current month
-				</button>
-			</div>
-			<br />
-
 			{users ? (
 				<>
-					<h1>Weight Graphs</h1>
+					<h1 className='mt-4'>Weight Graphs</h1>
+					<div className='max-w-7xl m-auto rounded-xl box-shadow mt-0'>
+						<h1 className='ml-0 text-left mb-1'>Filter</h1>
+						<span className='field'>Month</span> <input className='field-input w-[+150px]' name='month' placeholder='Enter month here..' onChange={onChange} value={filter.month === '' ? '' : filter.month + 1} />
+						<span className='field ml-10'>Year</span> <input className='field-input w-[+150px]' name='year' placeholder='Enter year here..' onChange={onChange} value={filter.year} />
+						<span className='field ml-10'>Metric</span> <Select value={selectValue} options={optionsSelect} onChange={setMetric} className={'w-[+150px] inline-block ml-5'} />
+						<button className='ml-5 btn-secondary' onClick={resetFilter}>
+							Goto current month
+						</button>
+					</div>
 
 					{users.map((user, idx) => {
 						let monthData = user.stats?.[filter.year]?.[filter.month]?.[filter.metric]?.split(',')
@@ -171,9 +168,9 @@ const Graphs = () => {
 						let data = initData(user.name, monthData, getLabels(filter.year, filter.month))
 
 						return monthData ? (
-							<div key={idx} className='max-w-7xl m-auto mt-5 rounded-xl box-shadow'>
+							<div key={idx} className='max-w-7xl m-auto mt-5 rounded-xl box-shadow mt-0'>
 								<Line
-									className='line-graph'
+									className='m-0'
 									options={options}
 									data={data}
 									onChange={(e) => {
