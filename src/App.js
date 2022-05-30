@@ -15,6 +15,14 @@ export const options = {
 	plugins: {
 		legend: {
 			position: 'top',
+			labels: {
+				// This more specific font property overrides the global property
+				font: {
+					// This is for the label i.e., `name` of the user.
+					size: 25,
+					style: 'bold',
+				},
+			},
 		},
 		title: {
 			display: true,
@@ -22,6 +30,13 @@ export const options = {
 			// ^^^ We don't need this title text.
 		},
 	},
+	// This doesn't work though :(
+	// scale: {
+	// 	pointLabels: {
+	// 		fontStyle: 'bold',
+	// 	},
+	// },
+	///
 	// vvv src: https://www.chartjs.org/docs/latest/axes/labelling.html
 	scales: {
 		y: {
