@@ -87,7 +87,7 @@ const UserStats = ({USER = null}) => {
 						// let value = user?.stats?.[year]?.[idx]?.[metric]
 						return (
 							<div className='flex justify-between' key={'month' + idx}>
-								<span className='field'>{monthName(idx)}</span> <input className='field-input' name={`stats.${idx}.${metric}`} placeholder='Enter stats here..' onChange={onChange} value={user?.stats?.[year]?.[idx]?.[metric] || ''} />
+								<span className='field'>{monthName(idx)}</span> <input inputmode='numeric' className='field-input' name={`stats.${idx}.${metric}`} placeholder='Enter stats here..' onChange={onChange} value={user?.stats?.[year]?.[idx]?.[metric] || ''} />
 							</div>
 						)
 					})}
