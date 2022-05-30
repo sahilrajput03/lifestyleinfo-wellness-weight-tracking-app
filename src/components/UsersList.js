@@ -18,9 +18,11 @@ const UsersList = () => {
 							const deleteUser = async () => {
 								let userMongo = window.userMongo
 
-								await userMongo.functions.deleteUser(user._id.toString())
-								await refetchUsers()
-								alert('User Deleted!')
+								if (window.confirm(`Are you sure, you want to delete ${user.name}?`)) {
+									await userMongo.functions.deleteUser(user._id.toString())
+									await refetchUsers()
+									alert('User Deleted!')
+								}
 							}
 
 							return (
