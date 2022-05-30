@@ -108,6 +108,10 @@ const optionsSelect = [
 	{value: 'carbs', label: 'carbs'},
 ]
 
+const optionsMonth = Array(12)
+	.fill(0)
+	.map((zero, idx) => ({value: idx, label: getMonthName(idx)}))
+
 const Graphs = () => {
 	// const [data, setData] = useState(initData)
 	const [users] = useUsersContext()
@@ -116,20 +120,9 @@ const Graphs = () => {
 	const onChange = (e) => {
 		const {name, value} = e.target
 
-		if (name === 'month') {
-			debugger
-
-			let monthValue = value === '' ? '' : value - 1 // Setting month-1 coz js assumes month like that!
-			if (isNaN(monthValue)) return // this is to avoid setting value if user typed some character.
-
-			setFilter((filter) => {
-				return {...filter, [name]: monthValue}
-			})
-		} else {
-			setFilter((filter) => {
-				return {...filter, [name]: value}
-			})
-		}
+		setFilter((filter) => {
+			return {...filter, [name]: value}
+		})
 	}
 
 	const resetFilter = () => {
@@ -142,10 +135,17 @@ const Graphs = () => {
 		})
 	}
 
+	const setMonth = (e) => {
+		setFilter((filter) => {
+			return {...filter, month: e.value}
+		})
+	}
+
 	// debug loading gif..
 	// return <Loading />
 
-	const selectValue = {value: filter.metric, label: filter.metric}
+	const valueMetric = {value: filter.metric, label: filter.metric}
+	const valueMonth = {value: filter.month, label: getMonthName(filter.month)}
 
 	return (
 		<>
@@ -155,13 +155,14 @@ const Graphs = () => {
 					<div className='max-w-7xl m-auto rounded-xl box-shadow mt-0 pt-0'>
 						<h1 className='ml-0 text-left mb-1'>Filter</h1>
 						<div className='my-2'>
-							<span className='field'>Month</span> <input className='field-input w-[+150px]' name='month' placeholder='Enter month here..' onChange={onChange} value={filter.month === '' ? '' : filter.month + 1} />
+							{/* <span className='field'>Month</span> <input className='field-input w-[+150px]' name='month' placeholder='Enter month here..' onChange={onChange} value={filter.month === '' ? '' : filter.month + 1} /> */}
+							<span className='field'>Month</span> <Select value={valueMonth} options={optionsMonth} onChange={setMonth} className={'w-[+120px] inline-block'} />
 						</div>
 						<div className='my-2'>
-							<span className='field'>Year</span> <input className='field-input w-[+150px]' name='year' placeholder='Enter year here..' onChange={onChange} value={filter.year} />
+							<span className='field'>Year</span> <input className='field-input w-[+120px] text-left' name='year' placeholder='Enter year here..' onChange={onChange} value={filter.year} />
 						</div>
 						<div className='my-2'>
-							<span className='field'>Metric</span> <Select value={selectValue} options={optionsSelect} onChange={setMetric} className={'w-[+150px] inline-block'} />
+							<span className='field'>Metric</span> <Select value={valueMetric} options={optionsSelect} onChange={setMetric} className={'w-[+120px] inline-block'} />
 						</div>
 						<button className='ml-5 btn-secondary' onClick={resetFilter}>
 							Goto current month
