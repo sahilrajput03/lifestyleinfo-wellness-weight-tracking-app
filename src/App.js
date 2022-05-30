@@ -10,19 +10,25 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 let log = console.log
 
+// src: https://www.chartjs.org/docs/latest/general/fonts.html
+ChartJS.defaults.font.size = 16
+ChartJS.defaults.font.weight = 'bold'
+
 export const options = {
 	responsive: true,
 	plugins: {
 		legend: {
 			position: 'top',
-			labels: {
-				// This more specific font property overrides the global property
-				font: {
-					// This is for the label i.e., `name` of the user.
-					size: 25,
-					style: 'bold',
-				},
-			},
+			//! Below doesn't work though :(
+			// labels: {
+			// 	// This more specific font property overrides the global property
+			// 	font: {
+			// 		// This is for the label i.e., `name` of the user.
+			// 		size: 105,
+			// 		style: 'bold',
+			// 		weight: '1200',
+			// 	},
+			// },
 		},
 		title: {
 			display: true,
@@ -30,7 +36,7 @@ export const options = {
 			// ^^^ We don't need this title text.
 		},
 	},
-	// This doesn't work though :(
+	//! Below doesn't work though :(
 	// scale: {
 	// 	pointLabels: {
 	// 		fontStyle: 'bold',
@@ -45,6 +51,10 @@ export const options = {
 					return value.toFixed(1) + ' kg'
 				},
 			},
+
+			// below styles doesn't work as well..
+			// fontColor: '#2c2c2c', // X-Axis font color
+			// fontStyle: 'bold', // X-Axis font style
 		},
 	},
 	// src: https://stackoverflow.com/a/42573360/10012446
@@ -215,24 +225,32 @@ const userGraph = (user, filter, idx = 0) => {
 	let monthData = user.stats?.[filter.year]?.[filter.month]?.[filter.metric]?.split(',')
 	let data = initData(user.name, monthData, getLabels(filter.year, filter.month))
 
-	return monthData ? (
-		<div key={idx} className='max-w-7xl m-auto rounded-xl box-shadow mt-0'>
-			<Line
-				className='m-0'
-				options={options}
-				data={data}
-				onChange={(e) => {
-					log('hell..??', e.target.value)
-				}}
-			/>
-			{/* <button onClick={addRandomData}>Add data</button> */}
-		</div>
-	) : (
-		<div key={idx}>
-			<span className='italic'>No stats found for</span> <span className='font-bold'>{user.name}</span>{' '}
-			<span className='italic'>
-				in {getMonthName(filter.month)}, {filter.year}
-			</span>
+	console.log({name: user.name, monthData})
+	if (monthData?.length === 1 && monthData[0] === '') {
+		// fix a weird case of empty values causes to show empty graph which we obviously don't want!
+		monthData = null
+	}
+
+	return (
+		<div className='max-w-7xl m-auto rounded-xl box-shadow mt-0'>
+			{monthData ? (
+				<Line
+					key={idx}
+					className='m-0'
+					options={options}
+					data={data}
+					onChange={(e) => {
+						log('hell..??', e.target.value)
+					}}
+				/>
+			) : (
+				<div key={idx}>
+					<span className='italic'>No stats found for</span> <span className='font-bold'>{user.name}</span>{' '}
+					<span className='italic'>
+						in {getMonthName(filter.month)}, {filter.year}
+					</span>
+				</div>
+			)}
 		</div>
 	)
 }

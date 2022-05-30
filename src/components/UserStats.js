@@ -59,7 +59,7 @@ const UserStats = ({USER = null}) => {
 			await userMongo.functions.updateUser({id: user._id.toString(), update: user})
 			alert('User updated!')
 			setUser(null)
-			refetchUsers()
+			await refetchUsers()
 			navigate('/')
 		} catch (error) {
 			alert('Failed..')
