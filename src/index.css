@@ -25,7 +25,7 @@
 		@apply my-2 flex justify-between;
 	}
 	.field {
-		@apply text-gray-700 text-lg mx-2 font-bold;
+		@apply inline-block w-16 text-gray-700 text-lg mx-2 font-bold;
 	}
 	.field-input {
 		@apply border border-gray-200 focus:outline-gray-400 p-1 rounded-md text-gray-600 text-center w-[+250px];

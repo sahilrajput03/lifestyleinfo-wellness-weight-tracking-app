@@ -152,11 +152,17 @@ const Graphs = () => {
 			{users ? (
 				<>
 					<h1 className='mt-4'>Weight Graphs</h1>
-					<div className='max-w-7xl m-auto rounded-xl box-shadow mt-0'>
+					<div className='max-w-7xl m-auto rounded-xl box-shadow mt-0 pt-0'>
 						<h1 className='ml-0 text-left mb-1'>Filter</h1>
-						<span className='field'>Month</span> <input className='field-input w-[+150px]' name='month' placeholder='Enter month here..' onChange={onChange} value={filter.month === '' ? '' : filter.month + 1} />
-						<span className='field ml-10'>Year</span> <input className='field-input w-[+150px]' name='year' placeholder='Enter year here..' onChange={onChange} value={filter.year} />
-						<span className='field ml-10'>Metric</span> <Select value={selectValue} options={optionsSelect} onChange={setMetric} className={'w-[+150px] inline-block ml-5'} />
+						<div className='my-2'>
+							<span className='field'>Month</span> <input className='field-input w-[+150px]' name='month' placeholder='Enter month here..' onChange={onChange} value={filter.month === '' ? '' : filter.month + 1} />
+						</div>
+						<div className='my-2'>
+							<span className='field'>Year</span> <input className='field-input w-[+150px]' name='year' placeholder='Enter year here..' onChange={onChange} value={filter.year} />
+						</div>
+						<div className='my-2'>
+							<span className='field'>Metric</span> <Select value={selectValue} options={optionsSelect} onChange={setMetric} className={'w-[+150px] inline-block'} />
+						</div>
 						<button className='ml-5 btn-secondary' onClick={resetFilter}>
 							Goto current month
 						</button>
