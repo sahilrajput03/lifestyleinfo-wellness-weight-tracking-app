@@ -116,6 +116,7 @@ const Graphs = () => {
 	// const [data, setData] = useState(initData)
 	const [users] = useUsersContext()
 	const [filter, setFilter] = useState(initFilter)
+	const [selectUser, setSelectUser] = useState(null)
 
 	const onChange = (e) => {
 		const {name, value} = e.target
@@ -147,6 +148,16 @@ const Graphs = () => {
 	const valueMetric = {value: filter.metric, label: filter.metric}
 	const valueMonth = {value: filter.month, label: getMonthName(filter.month)}
 
+	const defaultOptionUser = {value: null, label: 'All Users'}
+
+	const optionsUsers = [defaultOptionUser, ...(users || [])?.map((usr) => ({label: usr.name, value: usr._id.toString()}))]
+	const valueUser = selectUser ? {label: selectUser.name, value: selectUser._id.toString()} : defaultOptionUser
+
+	const selectSetUser = (e) => {
+		const user = users.find((usr) => usr._id.toString() === e.value)
+		setSelectUser(user)
+	}
+
 	return (
 		<>
 			{users ? (
@@ -156,50 +167,58 @@ const Graphs = () => {
 						<h1 className='ml-0 text-left mb-1'>Filter</h1>
 						<div className='my-2'>
 							{/* <span className='field'>Month</span> <input className='field-input w-[+150px]' name='month' placeholder='Enter month here..' onChange={onChange} value={filter.month === '' ? '' : filter.month + 1} /> */}
-							<span className='field'>Month</span> <Select value={valueMonth} options={optionsMonth} onChange={setMonth} className={'w-[+120px] inline-block'} />
+							<span className='field'>Month</span> <Select value={valueMonth} options={optionsMonth} onChange={setMonth} className={'w-[+180px] inline-block'} />
 						</div>
 						<div className='my-2'>
-							<span className='field'>Year</span> <input className='field-input w-[+120px] text-left' name='year' placeholder='Enter year here..' onChange={onChange} value={filter.year} />
+							<span className='field'>Year</span> <input className='field-input w-[+180px] text-left' name='year' placeholder='Enter year here..' onChange={onChange} value={filter.year} />
 						</div>
 						<div className='my-2'>
-							<span className='field'>Metric</span> <Select value={valueMetric} options={optionsSelect} onChange={setMetric} className={'w-[+120px] inline-block'} />
+							<span className='field'>Metric</span> <Select value={valueMetric} options={optionsSelect} onChange={setMetric} className={'w-[+180px] inline-block'} />
+						</div>
+						<div className='my-2'>
+							<span className='field'>User</span> <Select value={valueUser} options={optionsUsers} onChange={selectSetUser} className={'w-[+180px] inline-block'} />
 						</div>
 						<button className='ml-5 btn-secondary' onClick={resetFilter}>
 							Goto current month
 						</button>
 					</div>
 
-					{users.map((user, idx) => {
-						let monthData = user.stats?.[filter.year]?.[filter.month]?.[filter.metric]?.split(',')
-						// let data = initData(user.name, monthData, getLabels(2022, 4))
-						let data = initData(user.name, monthData, getLabels(filter.year, filter.month))
-
-						return monthData ? (
-							<div key={idx} className='max-w-7xl m-auto mt-5 rounded-xl box-shadow mt-0'>
-								<Line
-									className='m-0'
-									options={options}
-									data={data}
-									onChange={(e) => {
-										log('hell..??', e.target.value)
-									}}
-								/>
-								{/* <button onClick={addRandomData}>Add data</button> */}
-							</div>
-						) : (
-							<div key={idx}>
-								<span className='italic'>No stats found for</span> <span className='font-bold'>{user.name}</span>{' '}
-								<span className='italic'>
-									in {getMonthName(filter.month)}, {filter.year}
-								</span>
-							</div>
-						)
-					})}
+					{selectUser
+						? userGraph(selectUser, filter, 0)
+						: users.map((user, idx) => {
+								return userGraph(user, filter, idx)
+						  })}
 				</>
 			) : (
 				<Loading />
 			)}
 		</>
+	)
+}
+
+const userGraph = (user, filter, idx = 0) => {
+	let monthData = user.stats?.[filter.year]?.[filter.month]?.[filter.metric]?.split(',')
+	let data = initData(user.name, monthData, getLabels(filter.year, filter.month))
+
+	return monthData ? (
+		<div key={idx} className='max-w-7xl m-auto rounded-xl box-shadow mt-0'>
+			<Line
+				className='m-0'
+				options={options}
+				data={data}
+				onChange={(e) => {
+					log('hell..??', e.target.value)
+				}}
+			/>
+			{/* <button onClick={addRandomData}>Add data</button> */}
+		</div>
+	) : (
+		<div key={idx}>
+			<span className='italic'>No stats found for</span> <span className='font-bold'>{user.name}</span>{' '}
+			<span className='italic'>
+				in {getMonthName(filter.month)}, {filter.year}
+			</span>
+		</div>
 	)
 }
 
