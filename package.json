@@ -20,7 +20,7 @@
 	},
 	"scripts": {
 		"start": "react-scripts start",
-		"make:build:commit": "npm run build; git add -A; git commit -m 'Make build with husky (git-hook: pre-push) ~Sahil.'",
+		"deploy::build:commit:push": "npm run build; git add -A; git commit -m 'Make build with `deploy` script.'",
 		"prebuild": "rm -rf build docs",
 		"build": "react-scripts build",
 		"postbuild": "mv build docs; cp ghPagesSeup/* docs/ ",
