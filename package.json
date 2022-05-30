@@ -20,7 +20,7 @@
 	},
 	"scripts": {
 		"start": "react-scripts start",
-		"deploy::build:commit:push": "npm run build; git add -A; git commit -m 'Make build with `deploy` script.'; git push",
+		"deploy::build:commit:push": "npm run build; git add -A; git commit -m 'BUILD VIA `deploy` SCRIPT.'; git push",
 		"prebuild": "rm -rf build docs",
 		"build": "react-scripts build",
 		"postbuild": "mv build docs; cp ghPagesSeup/* docs/ ",
