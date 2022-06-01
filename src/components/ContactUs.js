@@ -1,8 +1,8 @@
 import {AiFillMessage, AiFillMail, AiFillPhone} from 'react-icons/ai'
 import {BsWhatsapp} from 'react-icons/bs'
 
-const MOBILE = 8360267243
-const EMAIL = 'my_email'
+const MOBILE = 9815404047
+const EMAIL = 'my_email@gmail.com'
 
 const text = encodeURI('Hi, New Life Style Wellness Centre. I want to know more about it.')
 const whatsAppMessageLink = `https://api.whatsapp.com/send?phone=+91${MOBILE}&text=${text}`

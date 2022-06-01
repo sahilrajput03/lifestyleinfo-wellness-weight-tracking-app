@@ -11,8 +11,8 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 let log = console.log
 
 // src: https://www.chartjs.org/docs/latest/general/fonts.html
-// ChartJS.defaults.font.size = 16
-ChartJS.defaults.font.size = 20
+ChartJS.defaults.font.size = 16
+// ChartJS.defaults.font.size = 20
 ChartJS.defaults.font.weight = 'bold'
 
 export const options = {
