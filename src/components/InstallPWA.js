@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react'
 
+let APP_NAME = 'New Life Style and Wellness Centre App'
+
 // src: https://dev.to/woile/simplest-react-hook-component-for-pwa-install-button-2die
 const InstallPWA = () => {
 	const [supportsPWA, setSupportsPWA] = useState(false)
@@ -12,6 +14,15 @@ const InstallPWA = () => {
 			// src: https://stackoverflow.com/a/51735941/10012446
 			setInstalled(true)
 		}
+
+		// do action when finished install, src: https://stackoverflow.com/a/58563406/10012446
+		window.addEventListener('appinstalled', (e) => {
+			alert(APP_NAME + ' installed successfully!')
+			setInstalled(true)
+
+			// Reloading in case for desktop browser works real good as it will hide th Install button asap now that the user has chosen to install the app. ~ Sahil
+			// window.document.location.reload()
+		})
 
 		const handler = (e) => {
 			e.preventDefault()
@@ -34,19 +45,25 @@ const InstallPWA = () => {
 		// alert(outcome)
 		if (outcome === 'accepted') {
 			// console.log('User accepted the A2HS prompt')
-			alert('Installing.. Please wait for few seconds..') // to be replaced with better ui later on.. // todo
-			// todo: refresh app after 7 seconds and show the banner that you have this website as app installed somehow..
-
-			// Reloading in case for desktop browser works real good as it will hide th Install button asap now that the user has chosen to install the app. ~ Sahil
-			window.document.location.reload()
+			alert('Installing now..') // to be replaced with better ui later on.. // todo
+			// fyi: this is fired after the successful install event, ~ thats weird ~ Sahil. Imo, its better to avoid handling anything here at all.
 		} else {
 			alert('User dismissed the A2HS prompt')
 		}
 	}
 
+	// src: https://stackoverflow.com/a/51735941/10012446, https://a2hs.glitch.me/
+	// https://github.com/ng-chicago/AddToHomeScreen/blob/master/src/app/a2hs.service.ts#L57
 	if (installed) {
+		let userAgentString = navigator.userAgent.toLowerCase()
+		let isMobile = /mobile/.test(userAgentString)
 		// for mobile can I redirect the user to pwa with this?
-		return 'Note: You have already `New Life Style Wellness Centre App` installed, you can use that to get a good experience.'
+		if (isMobile) {
+			return `Note: You have already '${APP_NAME}' installed, you can use that to get a good experience.`
+		} else {
+			// Dont show anythig at all (hide install button as well) when the app is installed in desktop!
+			return null
+		}
 	}
 
 	if (!supportsPWA) {
