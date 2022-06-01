@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react'
 // Simple revision: https://github.com/sahilrajput03#pwa-install-prompt
 
+// FYI: LEARN: do the workbox tutorial/course next time(10k stars on github): https://developer.chrome.com/docs/workbox/
+
 let APP_NAME = 'New Life Style App'
 let ALREADY_INSTALLED_MESSAGE = `You have ${APP_NAME} installed already, so use ${APP_NAME} from you Home screen or All Apps for better experience!`
 
