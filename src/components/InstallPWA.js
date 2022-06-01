@@ -106,8 +106,18 @@ const InstallPWA = () => {
 		// src: https://stackoverflow.com/a/51735941/10012446
 		let isStandaloneMode = window.matchMedia('(display-mode: standalone)').matches
 
-		if (isMobile && isStandaloneMode) {
-			return ALREADY_INSTALLED_MESSAGE
+		if (isMobile && !isStandaloneMode) {
+			//! yahan wo button hona chaiye redirect wala..<<
+			return (
+				<button
+					className='btn-primary'
+					onClick={() => {
+						window.open(window.location.href, '_blank')
+					}}
+				>
+					Open in App
+				</button>
+			)
 		} else {
 			// Dont show anythig at all for desktop users (hide install button as well).
 			return null
@@ -130,12 +140,3 @@ export default InstallPWA
 // https://web.dev/learn/pwa/installation-prompt/
 // amazing docs @ mdn: https://developer.mozilla.org/en-US/docs/Web/API/BeforeInstallPromptEvent
 // pwa react dpcs: https://create-react-app.dev/docs/making-a-progressive-web-app/
-
-// Go to pwa button (only show when user is on device and has already opened pwa!)
-// <button
-// 	onClick={() => {
-// 		window.open(window.location.href, '_blank')
-// 	}}
-// >
-// 	Open in App
-// </button>
