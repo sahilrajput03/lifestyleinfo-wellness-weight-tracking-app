@@ -8,6 +8,11 @@ const InstallPWA = () => {
 	const [promptInstall, setPromptInstall] = useState(null)
 	const [installed, setInstalled] = useState(null)
 
+	// todo:
+	// let isStandaloneMode = window.matchMedia('(display-mode: standalone)').matches
+	// if (isStandaloneMode) {
+	// 	alert('already installed..')
+	// }
 	useEffect(() => {
 		// do action when finished install, src: https://stackoverflow.com/a/58563406/10012446
 		window.addEventListener('appinstalled', (e) => {
