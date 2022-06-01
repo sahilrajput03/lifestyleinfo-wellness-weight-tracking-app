@@ -38,5 +38,12 @@
 	"background_color": "#ffffff",
 	"display": "standalone",
 	"scope": "/",
-	"theme_color": "#2196F3"
+	"theme_color": "#2196F3",
+	"related_applications": [
+		{
+			"platform": "webapp",
+			"_COMMENT": "PLEASE CHANGE BELOW ADDESS TO ALLOW CORRECT USAGE FOR `navigator.getInstalledRelatedApps`, this allows us to detect if the user has PWA installed or now!",
+			"url": "https://newfitness.ml/manifest.json"
+		}
+	]
 }

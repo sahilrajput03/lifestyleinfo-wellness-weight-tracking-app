@@ -8,32 +8,74 @@ const InstallPWA = () => {
 	const [promptInstall, setPromptInstall] = useState(null)
 	const [installed, setInstalled] = useState(null)
 
+	// https://stackoverflow.com/a/67618501/10012446
+	function getPWADisplayMode() {
+		const isStandalone = window.matchMedia('(display-mode: standalone)').matches
+		if (document.referrer.startsWith('android-app://')) {
+			return 'twa'
+		} else if (navigator.standalone || isStandalone) {
+			return 'standalone'
+		}
+		return 'browser'
+	}
+
+	// you can see this value from browser console now
+	window.pwa_display_mode = getPWADisplayMode()
+
 	// todo:
 	// let isStandaloneMode = window.matchMedia('(display-mode: standalone)').matches
 	// if (isStandaloneMode) {
 	// 	alert('already installed..')
 	// }
+
 	useEffect(() => {
-		// do action when finished install, src: https://stackoverflow.com/a/58563406/10012446
-		window.addEventListener('appinstalled', (e) => {
-			alert(APP_NAME + ' installed successfully!')
-			setInstalled(true)
-
-			// Open in pwa if device is mobile! // todo: add a check for mobile device..
-			window.open(window.location.href, '_blank')
-
-			// Reloading in case for desktop browser works real good as it will hide th Install button asap now that the user has chosen to install the app. ~ Sahil
-			// window.document.location.reload()
-		})
-
 		const handler = (e) => {
 			e.preventDefault()
 			// console.log('::beforeinstallprompt::we are being triggered :D')
 			setSupportsPWA(true)
 			setPromptInstall(e)
 		}
-		window.addEventListener('beforeinstallprompt', handler)
 
+		const main = async () => {
+			// Check if the user has installed the PWA previously. We make use of `navigator.getInstalledRelatedApps` api, src: https://stackoverflow.com/a/62711422/10012446
+			//check if browser version supports the api.
+			if ('getInstalledRelatedApps' in window.navigator) {
+				alert('here1')
+				const relatedApps = await navigator.getInstalledRelatedApps()
+				console.log({relatedApps})
+				relatedApps.forEach((app) => {
+					alert('here2')
+					//if your PWA exists in the array it is installed
+					console.log('::::relatedApps', app.platform, app.url)
+
+					let pfm = 'webapp',
+						url = 'https://newfitness.ml/manifest.json'
+
+					// app.platform and app.url is actually defined in manifest.json so MAKE SURE YOU HAVE SAME VALUES AS YOU ARE COMPARING WITH HERE! ~~ Sahil.
+					if (app.platform === pfm && app.url === url) {
+						alert('You have PWA already!!')
+					}
+
+					// console.log(app.platform, app.url)
+				})
+			}
+
+			// do action when finished install, src: https://stackoverflow.com/a/58563406/10012446
+			window.addEventListener('appinstalled', (e) => {
+				alert(APP_NAME + ' installed successfully!')
+				setInstalled(true)
+
+				// LEARN: In an attempt to open pwa directly will cause popup blockage, so better use some button action to open pwa.
+				//// window.open(window.location.href, '_blank')
+
+				// Reloading in case for desktop browser works real good as it will hide th Install button asap now that the user has chosen to install the app. ~ Sahil
+				// window.document.location.reload()
+			})
+
+			window.addEventListener('beforeinstallprompt', handler)
+		}
+
+		main()
 		return () => window.removeEventListener('transitionend', handler)
 	}, [])
 
