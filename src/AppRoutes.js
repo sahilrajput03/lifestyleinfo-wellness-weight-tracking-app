@@ -1,5 +1,5 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
-import App from './App'
+import Home from './Home'
 import AddUser from './components/AddUser'
 import EditUser from './components/EditUser'
 import NavBar from './components/NavBar'
@@ -15,7 +15,7 @@ const AppRoutes = () => {
 		<BrowserRouter>
 			<NavBar />
 			<Routes>
-				<Route path={paths.home} element={<App />} />
+				<Route path={paths.home} element={<Home />} />
 				<Route path={paths.addUser} element={<AddUser />} />
 				<Route path={paths.editUser} element={<EditUser />} />
 				<Route path={paths.userList} element={<UsersList />} />

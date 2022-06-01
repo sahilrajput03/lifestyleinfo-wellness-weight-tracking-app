@@ -77,3 +77,9 @@ exports = function (arg) {
 	return 'ok'
 }
 ```
+
+## Trigger pwa on instantly causes error
+
+Solution: https://stackoverflow.com/questions/58729197/the-prompt-method-must-be-called-with-a-user-gesture-error-in-angular-pwa
+
+tldr: you need to call the prompt() using some user's action like button click.
