@@ -9,12 +9,6 @@ const InstallPWA = () => {
 	const [installed, setInstalled] = useState(null)
 
 	useEffect(() => {
-		// My own way to to check if user has pwa app installed or not!
-		if (window.matchMedia('(display-mode: standalone)').matches) {
-			// src: https://stackoverflow.com/a/51735941/10012446
-			setInstalled(true)
-		}
-
 		// do action when finished install, src: https://stackoverflow.com/a/58563406/10012446
 		window.addEventListener('appinstalled', (e) => {
 			alert(APP_NAME + ' installed successfully!')
@@ -58,10 +52,14 @@ const InstallPWA = () => {
 		let userAgentString = navigator.userAgent.toLowerCase()
 		let isMobile = /mobile/.test(userAgentString)
 		// for mobile can I redirect the user to pwa with this?
-		if (isMobile) {
+
+		// src: https://stackoverflow.com/a/51735941/10012446
+		let isStandaloneMode = window.matchMedia('(display-mode: standalone)').matches
+
+		if (isMobile && isStandaloneMode) {
 			return `Note: You have already '${APP_NAME}' installed, you can use that to get a good experience.`
 		} else {
-			// Dont show anythig at all (hide install button as well) when the app is installed in desktop!
+			// Dont show anythig at all for desktop users (hide install button as well).
 			return null
 		}
 	}
