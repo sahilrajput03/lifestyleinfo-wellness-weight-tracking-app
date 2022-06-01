@@ -50,7 +50,12 @@ const InstallPWA = () => {
 
 					// app.platform and app.url is actually defined in manifest.json so MAKE SURE YOU HAVE SAME VALUES AS YOU ARE COMPARING WITH HERE! ~~ Sahil.
 					if (app.platform === pfm && app.url === url) {
-						alert(`You have ${APP_NAME} installed already, so use ${APP_NAME} from you Home screen or All Apps for better experience!`)
+						// src: https://stackoverflow.com/a/51735941/10012446
+						let isStandaloneMode = window.matchMedia('(display-mode: standalone)').matches
+
+						if (!isStandaloneMode) {
+							alert(`You have ${APP_NAME} installed already, so use ${APP_NAME} from you Home screen or All Apps for better experience!`)
+						}
 					}
 
 					// console.log(app.platform, app.url)

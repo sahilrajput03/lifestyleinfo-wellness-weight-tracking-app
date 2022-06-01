@@ -13,6 +13,7 @@ const NavBar = () => {
 			{/* <Title /> */}
 			<PageLinks />
 			<ContactUs />
+			Cool.
 		</nav>
 	)
 }
