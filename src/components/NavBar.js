@@ -10,7 +10,6 @@ const NavBar = () => {
 				paddingBottom: '1rem',
 			}}
 		>
-			Temp text
 			{/* <Title /> */}
 			<PageLinks />
 			<ContactUs />

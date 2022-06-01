@@ -38,22 +38,19 @@ const InstallPWA = () => {
 
 		const main = async () => {
 			// Check if the user has installed the PWA previously. We make use of `navigator.getInstalledRelatedApps` api, src: https://stackoverflow.com/a/62711422/10012446
-			//check if browser version supports the api.
+			// `await navigator.getInstalledRelatedApps()` always returns empty array i.e, `[]` for chrome desktop!
 			if ('getInstalledRelatedApps' in window.navigator) {
-				alert('here1')
 				const relatedApps = await navigator.getInstalledRelatedApps()
 				console.log({relatedApps})
 				relatedApps.forEach((app) => {
-					alert('here2')
-					//if your PWA exists in the array it is installed
-					console.log('::::relatedApps', app.platform, app.url)
-
+					//if your PWA exists in `relatedApps` array it is already installed on the target user!
+					// console.log('::::relatedApps', app.platform, app.url)
 					let pfm = 'webapp',
 						url = 'https://newfitness.ml/manifest.json'
 
 					// app.platform and app.url is actually defined in manifest.json so MAKE SURE YOU HAVE SAME VALUES AS YOU ARE COMPARING WITH HERE! ~~ Sahil.
 					if (app.platform === pfm && app.url === url) {
-						alert('You have PWA already!!')
+						alert(`You have ${APP_NAME} installed already, so use ${APP_NAME} from you Home screen or All Apps for better experience!`)
 					}
 
 					// console.log(app.platform, app.url)
