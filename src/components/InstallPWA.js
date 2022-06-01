@@ -128,7 +128,7 @@ const InstallPWA = () => {
 		return null
 	}
 	return (
-		<button className='link-button' id='setup_button' aria-label='Install app' title='Install app' onClick={onClick}>
+		<button className='btn-primary' aria-label='Install app' title='Install app' onClick={onClick}>
 			Install
 		</button>
 	)

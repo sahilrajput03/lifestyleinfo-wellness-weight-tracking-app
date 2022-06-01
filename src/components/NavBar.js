@@ -10,7 +10,7 @@ const NavBar = () => {
 				paddingBottom: '1rem',
 			}}
 		>
-			{/* <Title /> */}
+			<Title />
 			<PageLinks />
 			<ContactUs />
 		</nav>
