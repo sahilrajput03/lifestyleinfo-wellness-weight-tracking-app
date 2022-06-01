@@ -37,8 +37,8 @@ const InstallPWA = () => {
 		}
 
 		const main = async () => {
-			// Check if the user has installed the PWA previously. We make use of `navigator.getInstalledRelatedApps` api, src: https://stackoverflow.com/a/62711422/10012446
-			// `await navigator.getInstalledRelatedApps()` always returns empty array i.e, `[]` for chrome desktop!
+			// Check for mobile users that if the user has installed the PWA already. We make use of `navigator.getInstalledRelatedApps` api, src: https://stackoverflow.com/a/62711422/10012446
+			// LEARN `await navigator.getInstalledRelatedApps()` always returns empty array i.e, `[]` for chrome desktop!
 			if ('getInstalledRelatedApps' in window.navigator) {
 				const relatedApps = await navigator.getInstalledRelatedApps()
 				console.log({relatedApps})
