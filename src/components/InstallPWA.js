@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
+// Simple revision: https://github.com/sahilrajput03#pwa-install-prompt
 
-let APP_NAME = 'New Life Style and Wellness Centre App'
+let APP_NAME = 'New Life Style App'
 let ALREADY_INSTALLED_MESSAGE = `You have ${APP_NAME} installed already, so use ${APP_NAME} from you Home screen or All Apps for better experience!`
 
 // src: https://dev.to/woile/simplest-react-hook-component-for-pwa-install-button-2die
@@ -20,14 +21,8 @@ const InstallPWA = () => {
 		return 'browser'
 	}
 
-	// you can see this value from browser console now
+	//FOR DEBUGGING ONLY: you can see this value from browser console now
 	window.pwa_display_mode = getPWADisplayMode()
-
-	// todo:
-	// let isStandaloneMode = window.matchMedia('(display-mode: standalone)').matches
-	// if (isStandaloneMode) {
-	// 	alert('already installed..')
-	// }
 
 	useEffect(() => {
 		const handler = (e) => {
@@ -54,7 +49,9 @@ const InstallPWA = () => {
 						// src: https://stackoverflow.com/a/51735941/10012446
 						let isStandaloneMode = window.matchMedia('(display-mode: standalone)').matches
 
+						// LEARN: standalonemode = you are viewing site in pwa!
 						if (!isStandaloneMode) {
+							setInstalled(true) // set state so component's state is updated!
 							alert(ALREADY_INSTALLED_MESSAGE)
 						}
 					}
@@ -129,7 +126,12 @@ const InstallPWA = () => {
 
 export default InstallPWA
 
-// todo: Use open in App button or trigger it automatically ?? What do you think?
+// for more pwa hook: https://dev.to/rikurouvila/react-hook-for-showing-custom-add-to-home-screen-prompt-472c
+// https://web.dev/learn/pwa/installation-prompt/
+// amazing docs @ mdn: https://developer.mozilla.org/en-US/docs/Web/API/BeforeInstallPromptEvent
+// pwa react dpcs: https://create-react-app.dev/docs/making-a-progressive-web-app/
+
+// Go to pwa button (only show when user is on device and has already opened pwa!)
 // <button
 // 	onClick={() => {
 // 		window.open(window.location.href, '_blank')
@@ -137,8 +139,3 @@ export default InstallPWA
 // >
 // 	Open in App
 // </button>
-
-// for more pwa hook: https://dev.to/rikurouvila/react-hook-for-showing-custom-add-to-home-screen-prompt-472c
-// https://web.dev/learn/pwa/installation-prompt/
-// amazing docs @ mdn: https://developer.mozilla.org/en-US/docs/Web/API/BeforeInstallPromptEvent
-// pwa react dpcs: https://create-react-app.dev/docs/making-a-progressive-web-app/
