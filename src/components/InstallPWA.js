@@ -129,7 +129,7 @@ const InstallPWA = () => {
 	}
 	return (
 		<button className='btn-primary' aria-label='Install app' title='Install app' onClick={onClick}>
-			Install
+			Install app
 		</button>
 	)
 }

@@ -21,7 +21,7 @@
 	"scripts": {
 		"start": "react-scripts start",
 		"deploy::build:commit:push": "npm run build && git add -A && git commit -m 'BUILD VIA `deploy` SCRIPT.' && git push",
-		"build": "react-scripts build; tm 90; echo You app should have been published already!",
+		"build": "react-scripts build",
 		"postbuild": "rm -rf docs; mv build docs; cp ghPagesSeup/* docs/ ",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"
