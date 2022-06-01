@@ -8,8 +8,7 @@ const InstallPWA = () => {
 	useEffect(() => {
 		const handler = (e) => {
 			e.preventDefault()
-			alert('ye got here.')
-			console.log('we are being triggered :D')
+			// console.log('::beforeinstallprompt::we are being triggered :D')
 			setSupportsPWA(true)
 			setPromptInstall(e)
 		}
@@ -19,10 +18,9 @@ const InstallPWA = () => {
 	}, [])
 
 	const onClick = (evt) => {
-		evt.preventDefault()
-		if (!promptInstall) {
-			return
-		}
+		evt.preventDefault() // disable default info bar install prompt shown in chrome android and desktop.
+		if (!promptInstall) return
+
 		promptInstall.prompt()
 	}
 	if (!supportsPWA) {

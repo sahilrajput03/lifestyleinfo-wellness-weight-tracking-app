@@ -24,8 +24,7 @@
 		"build": "react-scripts build",
 		"postbuild": "rm -rf docs; mv build docs; cp ghPagesSeup/* docs/ ",
 		"test": "react-scripts test",
-		"eject": "react-scripts eject",
-		"prepare": "husky install"
+		"eject": "react-scripts eject"
 	},
 	"eslintConfig": {
 		"extends": [
