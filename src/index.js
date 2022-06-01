@@ -15,13 +15,6 @@ if ('serviceWorker' in navigator) {
 root.render(
 	<React.StrictMode>
 		<InstallPWA />
-		<button
-			onClick={() => {
-				window.open(window.location.href, '_blank')
-			}}
-		>
-			Open pwa
-		</button>
 		<AppRoutes />
 	</React.StrictMode>
 )

@@ -19,6 +19,9 @@ const InstallPWA = () => {
 			alert(APP_NAME + ' installed successfully!')
 			setInstalled(true)
 
+			// Open in pwa if device is mobile! // todo: add a check for mobile device..
+			window.open(window.location.href, '_blank')
+
 			// Reloading in case for desktop browser works real good as it will hide th Install button asap now that the user has chosen to install the app. ~ Sahil
 			// window.document.location.reload()
 		})
@@ -80,6 +83,15 @@ const InstallPWA = () => {
 }
 
 export default InstallPWA
+
+// todo: Use open in App button or trigger it automatically ?? What do you think?
+// <button
+// 	onClick={() => {
+// 		window.open(window.location.href, '_blank')
+// 	}}
+// >
+// 	Open in App
+// </button>
 
 // for more pwa hook: https://dev.to/rikurouvila/react-hook-for-showing-custom-add-to-home-screen-prompt-472c
 // https://web.dev/learn/pwa/installation-prompt/
