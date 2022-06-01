@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 
 let APP_NAME = 'New Life Style and Wellness Centre App'
+let ALREADY_INSTALLED_MESSAGE = `You have ${APP_NAME} installed already, so use ${APP_NAME} from you Home screen or All Apps for better experience!`
 
 // src: https://dev.to/woile/simplest-react-hook-component-for-pwa-install-button-2die
 const InstallPWA = () => {
@@ -54,7 +55,7 @@ const InstallPWA = () => {
 						let isStandaloneMode = window.matchMedia('(display-mode: standalone)').matches
 
 						if (!isStandaloneMode) {
-							alert(`You have ${APP_NAME} installed already, so use ${APP_NAME} from you Home screen or All Apps for better experience!`)
+							alert(ALREADY_INSTALLED_MESSAGE)
 						}
 					}
 
@@ -109,7 +110,7 @@ const InstallPWA = () => {
 		let isStandaloneMode = window.matchMedia('(display-mode: standalone)').matches
 
 		if (isMobile && isStandaloneMode) {
-			return `Note: You have already '${APP_NAME}' installed, you can use that to get a good experience.`
+			return ALREADY_INSTALLED_MESSAGE
 		} else {
 			// Dont show anythig at all for desktop users (hide install button as well).
 			return null
