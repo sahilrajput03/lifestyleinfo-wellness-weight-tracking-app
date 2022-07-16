@@ -7,6 +7,11 @@ Pending todos(moved here from google tasks):
 - add muscle calculation through weight somehow and show in graph.
 - single mode /multi mode to show people'e track together
 - check if adding a new value can animate single point in the line graph.?? If so, add the webrtc frature to track live adding of the metrics.
+
+---
+Desorabe domain: trackhealth.ml
+Make pwa of it.
+
 ```
 
 Reference Article: https://blog.logrocket.com/using-chart-js-react
