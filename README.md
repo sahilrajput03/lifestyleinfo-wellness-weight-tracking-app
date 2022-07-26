@@ -1,5 +1,19 @@
 # Readme
 
+```txt
+Pending todos(moved here from google tasks):
+-  click on edit user and click on add user: this crashes the app
+- update any user and then you must update the list of allUsers again to fetch the newly updated user to local app.js component gets updated.
+- add muscle calculation through weight somehow and show in graph.
+- single mode /multi mode to show people'e track together
+- check if adding a new value can animate single point in the line graph.?? If so, add the webrtc frature to track live adding of the metrics.
+
+---
+Desorabe domain: trackhealth.ml
+Make pwa of it.
+
+```
+
 Reference Article: https://blog.logrocket.com/using-chart-js-react
 
 React-chartjs-2: https://react-chartjs-2.js.org/examples/line-chart/
