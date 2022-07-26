@@ -1,0 +1,11 @@
+sections: 
+
+- workout
+- daily routine
+- results section
+- balanced nutrition (30protein+30good_fats+40carbs)
+- club activity
+- 
+---
+- video to gif??
+We make the world healthier and happier.
